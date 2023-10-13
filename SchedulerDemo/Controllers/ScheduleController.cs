@@ -43,7 +43,7 @@ namespace SchedulerDemo.Controllers
 
 
         [HttpGet("Filtered")]
-        public List<Userform> GetFiltered(DateTime date, TimeSpan time)
+        public List<Userform> GetFiltered(DateTime date, TimeSpan? time)
         {
             List<Userform> result = new List<Userform>();
 

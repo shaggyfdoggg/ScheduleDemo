@@ -132,5 +132,8 @@
       }
     }
   },
-  "defaultProject": "SchedulerDemo"
+  "defaultProject": "SchedulerDemo",
+  "cli": {
+    "analytics": false
+  }
 }
