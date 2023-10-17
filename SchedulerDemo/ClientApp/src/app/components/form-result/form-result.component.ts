@@ -14,8 +14,8 @@ export class FormResultComponent {
   ngOnInit(){
     this.GetEvents();
   }
-  
-  list: Userform[] = {} as Userform [];
+
+  list: Userform[] = [];
 
   GetEvents():Userform[]{
     this._formService.getAll().subscribe((response: Userform[]) =>{

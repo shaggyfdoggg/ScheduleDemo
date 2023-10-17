@@ -1,20 +1,20 @@
 <h2 style="color: white;">Add an Event</h2>
 <p>First Name</p>
-<input type="text" placeholder="First Name" [(ngModel)]="newEvent.firstName" />
+<input type="text" placeholder="First Name" [(ngModel)]="e.firstName" />
 <p>Last Name</p>
-<input type="text" placeholder="Last Name" [(ngModel)]="newEvent.lastName" />
+<input type="text" placeholder="Last Name" [(ngModel)]="e.lastName" />
 <p>Date</p>
-<input type="date" placeholder="Date" [(ngModel)]="newEvent.date" />
+<input type="date" placeholder="Date" [(ngModel)]="e.date" />
 <p>Time</p>
-<input type="time" placeholder="Time" [(ngModel)]="newEvent.time" />
+<input type="time" placeholder="Time" [(ngModel)]="e.time" />
 <p>Description</p>
-<input type="text" placeholder="Description" [(ngModel)]="newEvent.description" />
+<input type="text" placeholder="Description" [(ngModel)]="e.description" />
 <p>Address</p>
-<input type="text" placeholder="Address" [(ngModel)]="newEvent.address" />
+<input type="text" placeholder="Address" [(ngModel)]="e.address" />
 <p>City</p>
-<input type="text" placeholder="City" [(ngModel)]="newEvent.city" />
+<input type="text" placeholder="City" [(ngModel)]="e.city" />
 <p>State</p>
-<select [(ngModel)]="newEvent.state">
+<select [(ngModel)]="e.state">
 	<option value="AL">Alabama</option>
 	<option value="AK">Alaska</option>
 	<option value="AZ">Arizona</option>
@@ -67,6 +67,6 @@
 	<option value="WI">Wisconsin</option>
 	<option value="WY">Wyoming</option>
 </select>
-<p>Public? Y/N 
-<input type="checkbox" [(ngModel)]="newEvent.public" /> &nbsp; </p>
-<button (click)="addingEvent()">Submit</button>
+<p>Public?  
+<input type="checkbox" [(ngModel)]="e.public" /> &nbsp; </p>
+<button (click)="addingEvent(e)">Submit</button>
