@@ -34,6 +34,7 @@ import { AboutComponent } from './components/about/about.component';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
+      { path: 'event-list', component: FormResultComponent },
     ])
   ],
   providers: [],
