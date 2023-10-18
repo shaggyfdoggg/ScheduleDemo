@@ -43,21 +43,21 @@ namespace SchedulerDemo.Controllers
 
 
         [HttpGet("Filtered")]
-        public List<Userform> GetFiltered(DateTime? date, DateTime? time)
+        public List<Userform> GetFiltered(DateTime? date)
         {
             List<Userform> result = new List<Userform>();
 
-            if(time == null)
-            {
+            //if(time == null)
+            //{
 
-                result = dbContext.Userforms.Where(p=> p.Date == date).ToList();
-            }
+            result = dbContext.Userforms.Where(p => p.DateTime == date).ToList();
+            //}
 
-            else
-            {
-                result = dbContext.Userforms.Where(p=>p.Date == date && p.Time == time ).ToList();
+            //else
+            //{
+            //    result = dbContext.Userforms.Where(p=>p.Date == date && p.Time == time ).ToList();
 
-            }
+        //}
             return result; 
         }
 

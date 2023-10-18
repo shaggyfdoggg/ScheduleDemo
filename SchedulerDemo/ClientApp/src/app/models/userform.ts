@@ -5,7 +5,6 @@ export interface Userform {
     firstName?: string;
     lastName?: string;
     date?: Date;
-    time?: Date;
     description?: string;
     address?: string;
     city?: string;

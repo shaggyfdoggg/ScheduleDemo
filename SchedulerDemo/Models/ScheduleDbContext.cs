@@ -19,13 +19,13 @@ public partial class ScheduleDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer(secret.optbuild);
+        => optionsBuilder.UseSqlServer("Data Source=schedulerdemo.database.windows.net; Initial Catalog=ScheduleDB; User Id=FOS; Password=C#July2023");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Userform>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__userform__3213E83FE2602168");
+            entity.HasKey(e => e.Id).HasName("PK__userform__3213E83F2BA0B34C");
 
             entity.ToTable("userform");
 
@@ -36,9 +36,9 @@ public partial class ScheduleDbContext : DbContext
             entity.Property(e => e.City)
                 .HasMaxLength(255)
                 .HasColumnName("city");
-            entity.Property(e => e.Date)
-                .HasColumnType("date")
-                .HasColumnName("date");
+            entity.Property(e => e.DateTime)
+                .HasColumnType("datetime")
+                .HasColumnName("dateTime");
             entity.Property(e => e.Description)
                 .HasMaxLength(3000)
                 .HasColumnName("description");
@@ -50,9 +50,8 @@ public partial class ScheduleDbContext : DbContext
                 .HasColumnName("lastName");
             entity.Property(e => e.Public).HasColumnName("public");
             entity.Property(e => e.State)
-                .HasMaxLength(3)
+                .HasMaxLength(255)
                 .HasColumnName("state");
-            entity.Property(e => e.Time).HasColumnName("time");
         });
 
         OnModelCreatingPartial(modelBuilder);
