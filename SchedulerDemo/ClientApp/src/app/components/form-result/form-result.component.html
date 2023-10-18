@@ -1,8 +1,7 @@
 <div *ngFor="let l of list">
     <p>{{l.firstName}}</p>
     <p>{{l.lastName}}</p>
-    <p>{{l.date}}</p>
-    <p>{{l.time}}</p>
+    <p>{{l.dateTime | date: "short"}}</p>
     <p>{{l.description}}</p>
     <p>{{l.address}}</p>
     <p>{{l.city}}</p>

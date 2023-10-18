@@ -4,8 +4,9 @@
 <p>Last Name</p>
 <input type="text" placeholder="Last Name" [(ngModel)]="e.lastName" />
 <p>Date</p>
-<input type="date" placeholder="Date" [(ngModel)]="e.date" />
-
+<input type="datetime-local" placeholder="Date" [(ngModel)]="e.dateTime" />
+<!-- <p>Time</p>
+<input type="time" placeholder="Time" [(ngModel)]="e.dateTime" /> -->
 <p>Description</p>
 <input type="text" placeholder="Description" [(ngModel)]="e.description" />
 <p>Address</p>
@@ -68,4 +69,4 @@
 </select>
 <p>Public?  
 <input type="checkbox" [(ngModel)]="e.public" /> &nbsp; </p>
-<button (click)="addingEvent(e)">Submit</button>
+<button [routerLink]="['/event-list']" (click)="addingEvent(e)">Submit</button>

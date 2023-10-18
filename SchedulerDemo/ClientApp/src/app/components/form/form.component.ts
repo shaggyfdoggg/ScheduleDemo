@@ -27,7 +27,7 @@ export class FormComponent {
       console.log(response);
       this.eventList.push(response);
     });
-    
+    this.e = {} as Userform;
   }
 
   // CreateEvent(){

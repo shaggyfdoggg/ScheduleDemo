@@ -4,7 +4,7 @@ export interface Userform {
     id: number;
     firstName?: string;
     lastName?: string;
-    date?: Date;
+    dateTime: Date;
     description?: string;
     address?: string;
     city?: string;
