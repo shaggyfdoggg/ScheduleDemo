@@ -1,13 +1,11 @@
-<div *ngFor="let l of list">
-    <p>{{l.firstName}}</p>
-    <p>{{l.lastName}}</p>
-    <p>{{l.dateTime | date: "short"}}</p>
-    <p>{{l.description}}</p>
-    <p>{{l.address}}</p>
-    <p>{{l.city}}</p>
-    <p>{{l.state}}</p>
-    <p>{{l.public}}</p>
-    <br>
-    <br>
-    <br>
-</div>
+<div class="list-container">
+    <div *ngFor="let l of list" class="list-item">
+      <p class="list-item-property">{{ l.firstName }}</p>
+      <p class="list-item-property">{{ l.lastName }}</p>
+      <p class="list-item-property">{{ l.dateTime | date: "short" }}</p>
+      <p class="list-item-property">{{ l.description }}</p>
+      <p class="list-item-property">{{ l.address }}</p>
+      <p class="list-item-property">{{ l.city }}</p>
+      <p class="list-item-property">{{ l.state }}</p>
+    </div>
+  </div>

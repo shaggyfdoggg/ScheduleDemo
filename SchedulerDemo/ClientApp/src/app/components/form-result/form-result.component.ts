@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Userform } from 'src/app/models/userform';
 import { UserformService } from 'src/app/services/userform.service';
+import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 
 @Component({
   selector: 'app-form-result',
@@ -9,9 +10,16 @@ import { UserformService } from 'src/app/services/userform.service';
 })
 export class FormResultComponent {
 
-  constructor(private _formService: UserformService) {}
+  user: SocialUser = {} as SocialUser;
+ loggedIn: boolean = false;
+
+  constructor(private _formService: UserformService, private authService: SocialAuthService) {}
 
   ngOnInit(){
+    this.authService.authState.subscribe((user) => {
+      this.user = user;
+      this.loggedIn = (user != null);
+    });
     this.GetEvents();
   }
 
