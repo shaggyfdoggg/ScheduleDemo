@@ -42,6 +42,23 @@
               >Event List</a
             >
           </li>
+          <!-- Provided as an li to slot nicely in nav-menu. Can remove the li for your own design if needed -->
+          <li class="nav-item">
+            <!-- Below is the custom login component. -->
+            <asl-google-signin-button
+              *ngIf="!loggedIn"
+              type="icon"
+              size="medium"
+            ></asl-google-signin-button>
+            <!-- Calls the log out method from the notes -->
+            <button
+              class="btn btn-outline-dark"
+              *ngIf="loggedIn"
+              (click)="signOut()"
+            >
+              Sign Out
+            </button>
+          </li>
         </ul>
       </div>
     </div>
