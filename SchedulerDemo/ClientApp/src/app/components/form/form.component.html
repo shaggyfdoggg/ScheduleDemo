@@ -1,4 +1,5 @@
-<div *ngIf="[(loggedIn == true) && doesIdExist == true ]">
+<div class ="form" *ngIf="loggedIn == true && doesIdExist == false">
+	<h2>Enter your location</h2>
 	<p>Address</p>
 	<input type="text" placeholder="Address" [(ngModel)]="newUser.address" />
 	<p>City</p>
@@ -57,7 +58,7 @@
 		<option value="WI">Wisconsin</option>
 		<option value="WY">Wyoming</option>
 	</select>
-	<button (click)="newUserInfo(newUser)">Submit</button>
+	<button [routerLink]="['']" (click)="newUserInfo(newUser)">Submit</button>
 </div>
 
 
@@ -65,8 +66,8 @@
 
 
 
-
-<h2 style="color: white;">Add an Event</h2>
+<div class="form">
+<h2 style="color: rgb(0, 0, 0);">Add an Event</h2>
 <!-- <p>First Name</p>
 <input type="text" placeholder="First Name" [(ngModel)]="e.firstName" />
 <p>Last Name</p>
@@ -137,4 +138,5 @@
 	<option value="WY">Wyoming</option>
 </select>
 </div>
-<button [routerLink]="['/event-list']" (click)="addingEvent(e)">Submit</button>
+<button [routerLink]="['event-list']" (click)="addingEvent(e)">Submit</button>
+</div>

@@ -31,20 +31,30 @@ export class FormComponent {
     this.authService.authState.subscribe((user) => {
       this.user = user;
       this.loggedIn = user != null;
+      this.doesThisPersonExist();
     });
-    this.doesThisPersonExist();
   }
 
-  addingEvent(newEvent: Userform): void {
-    
-    newEvent.firstName = this.user.firstName;
-    newEvent.lastName = this.user.lastName;
-    this._formService.addEvent(newEvent).subscribe((response: Userform) => {
+  addingEvent(newEvent: Userform): void {   
+    this.userinfoservice.getById(this.user.id).subscribe((response: UserInfo)=> {
       console.log(response);
-      this.eventList.push(response);
+      this.newUser = response;
+      newEvent.googleId = this.newUser.googleId;
+      newEvent.address = this.newUser.address;
+      newEvent.city = this.newUser.city;
+      newEvent.state = this.newUser.state;
+      newEvent.firstName = this.user.firstName;
+      newEvent.lastName = this.user.lastName;
+      this._formService.addEvent(newEvent).subscribe((response: Userform) => {
+        console.log(response);
+        this.eventList.push(response);
+      });
     });
     this.e = {} as Userform;
+    this.newUser = {} as UserInfo;
   }
+
+
 
   newUserInfo(newUser: UserInfo): void {
     newUser.googleId = this.user.id
@@ -54,7 +64,7 @@ export class FormComponent {
         console.log(response);
         this.userInfoList.push(response);
       });
-      this.newUser = {} as UserInfo;
+      this.userInfoList = [];
   }
 
 doesThisPersonExist():void{
@@ -62,6 +72,9 @@ doesThisPersonExist():void{
     console.log(response);
   if(response != null){
 this.doesIdExist = true;
+}
+else {
+  this.doesIdExist = false;
 }
   });
     

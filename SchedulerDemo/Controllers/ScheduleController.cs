@@ -70,7 +70,7 @@ namespace SchedulerDemo.Controllers
             return newEvent;
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public Userform DeleteEvent(int id)
         {
             Userform deleted = dbContext.Userforms.Find(id);
