@@ -72,12 +72,22 @@
 <input type="text" placeholder="First Name" [(ngModel)]="e.firstName" />
 <p>Last Name</p>
 <input type="text" placeholder="Last Name" [(ngModel)]="e.lastName" /> -->
+<div *ngIf="doesIdExist == true">
+	<br>
+<h4>{{user.firstName}} {{user.lastName}}</h4>
+<p>Address: {{newUser.address}} </p>
+<p>City: {{newUser.city}} </p>
+<p>State: {{newUser.state}} </p>
+<br>
+</div>
 <p>Date</p>
 <input type="datetime-local" placeholder="Date" [(ngModel)]="e.dateTime" />
 <!-- <p>Time</p>
 <input type="time" placeholder="Time" [(ngModel)]="e.dateTime" /> -->
 <p>Description</p>
 <input type="text" placeholder="Description" [(ngModel)]="e.description" />
+
+
 <div *ngIf="doesIdExist == false">
 <p>Address</p>
 <input type="text" placeholder="Address" [(ngModel)]="e.address" />

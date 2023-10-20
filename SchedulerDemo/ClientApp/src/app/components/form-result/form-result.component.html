@@ -1,7 +1,7 @@
 <div class="list-container">
     <div *ngFor="let l of list" class="list-item">
-      <p class="list-item-property">{{ l.firstName }}</p>
-      <p class="list-item-property">{{ l.lastName }}</p>
+      <h4 class="list-item-property">{{ l.firstName }}</h4>
+      <h4 class="list-item-property">{{ l.lastName }}</h4>
       <p class="list-item-property">{{ l.dateTime | date: "short" }}</p>
       <p class="list-item-property">{{ l.description }}</p>
       <p class="list-item-property">{{ l.address }}</p>

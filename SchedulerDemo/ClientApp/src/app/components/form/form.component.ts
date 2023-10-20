@@ -70,6 +70,7 @@ export class FormComponent {
 doesThisPersonExist():void{
   this.userinfoservice.getById(this.user.id).subscribe((response: UserInfo)=> {
     console.log(response);
+    this.newUser = response;
   if(response != null){
 this.doesIdExist = true;
 }
