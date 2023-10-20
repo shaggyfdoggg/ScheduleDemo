@@ -17,7 +17,7 @@ export class FormResultComponent {
   isAdmin: boolean = false;
   newUser: UserInfo = {} as UserInfo;
   list: Userform[] = [];
-  
+
   constructor(private _formService: UserformService, private authService: SocialAuthService, private userinfoservice: UserInfoService) {}
 
   ngOnInit(){
@@ -27,8 +27,8 @@ export class FormResultComponent {
       this.loggedIn = (user != null);
       this.setGoogleId();
       this.admin();
+      this.GetEvents();
     });
-    this.GetEvents();
   }
 
    admin():void{
