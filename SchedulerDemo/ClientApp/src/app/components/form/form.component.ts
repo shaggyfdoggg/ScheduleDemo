@@ -68,15 +68,21 @@ export class FormComponent {
   }
 
 doesThisPersonExist():void{
+  if(this.user.id == null){
+    this.doesIdExist = false;
+  }
+  else{
   this.userinfoservice.getById(this.user.id).subscribe((response: UserInfo)=> {
     console.log(response);
     this.newUser = response;
-  if(response != null){
-this.doesIdExist = true;
-}
-else {
-  this.doesIdExist = false;
-}
+
+    if(response != null){
+      this.doesIdExist = true;
+    }
+
+// else {
+//   this.doesIdExist = false;
+// }
   });
     
 
@@ -84,7 +90,7 @@ else {
 }
 
 }
-
+}
 
 
 // CreateEvent(){
