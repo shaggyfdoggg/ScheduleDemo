@@ -31,67 +31,61 @@ export class FormComponent {
     this.authService.authState.subscribe((user) => {
       this.user = user;
       this.loggedIn = user != null;
-      this.doesThisPersonExist();
+      // this.doesThisPersonExist();
     });
   }
 
-  addingEvent(newEvent: Userform): void {   
-    this.userinfoservice.getById(this.user.id).subscribe((response: UserInfo)=> {
-      console.log(response);
-      this.newUser = response;
-      newEvent.googleId = this.newUser.googleId;
-      newEvent.address = this.newUser.address;
-      newEvent.city = this.newUser.city;
-      newEvent.state = this.newUser.state;
-      newEvent.firstName = this.user.firstName;
-      newEvent.lastName = this.user.lastName;
-      this._formService.addEvent(newEvent).subscribe((response: Userform) => {
+  addingEvent(newEvent: Userform): void {
+    this.userinfoservice
+      .getById(this.user.id)
+      .subscribe((response: UserInfo) => {
         console.log(response);
-        this.eventList.push(response);
+        this.newUser = response;
+        newEvent.googleId = this.newUser.googleId;
+        newEvent.address = this.newUser.address;
+        newEvent.city = this.newUser.city;
+        newEvent.state = this.newUser.state;
+        newEvent.firstName = this.user.firstName;
+        newEvent.lastName = this.user.lastName;
+        this._formService.addEvent(newEvent).subscribe((response: Userform) => {
+          console.log(response);
+          this.eventList.push(response);
+        });
       });
-    });
     this.e = {} as Userform;
     this.newUser = {} as UserInfo;
   }
 
-
-
   newUserInfo(newUser: UserInfo): void {
-    newUser.googleId = this.user.id
-    this.userinfoservice
-      .newUser(newUser)
-      .subscribe((response: UserInfo) => {
-        console.log(response);
-        this.userInfoList.push(response);
-      });
-      this.userInfoList = [];
+    newUser.googleId = this.user.id;
+    this.userinfoservice.newUser(newUser).subscribe((response: UserInfo) => {
+      console.log(response);
+      this.userInfoList.push(response);
+    });
+    this.userInfoList = [];
   }
 
-doesThisPersonExist():void{
-  if(this.user.id == null){
-    this.doesIdExist = false;
+  doesThisPersonExist(): void {
+    if (this.user.id == null) {
+      this.doesIdExist = false;
+    } else {
+      this.userinfoservice
+        .getById(this.user.id)
+        .subscribe((response: UserInfo) => {
+          console.log(response);
+          this.newUser = response;
+
+         // if (response != null) {
+            this.doesIdExist = true;
+          //}
+
+          // else {
+          //   this.doesIdExist = false;
+          // }
+    })};
+    
   }
-  else{
-  this.userinfoservice.getById(this.user.id).subscribe((response: UserInfo)=> {
-    console.log(response);
-    this.newUser = response;
-
-    if(response != null){
-      this.doesIdExist = true;
-    }
-
-// else {
-//   this.doesIdExist = false;
-// }
-  });
-    
-
-    
 }
-
-}
-}
-
 
 // CreateEvent(){
 // this.eventCreated.emit(this.e);

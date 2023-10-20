@@ -26,25 +26,27 @@ export class FormResultComponent {
       this.user = user;
       this.loggedIn = (user != null);
       this.setGoogleId();
-      this.admin();
+      //this.admin();
       this.GetEvents();
     });
   }
 
-   admin():void{
-     if(this.user.id == "111099414700493252194" ){
-    this.isAdmin = true;
-  }
-  if(this.user.id == "111099414700493252194" ){
-    this.isAdmin = true;
-  }
-  if(this.user.id == "111099414700493252194" ){
-    this.isAdmin = true;
-  }
-  if(this.user.id == "111099414700493252194" ){
-    this.isAdmin = true;
-  }
-   }
+//   admin():void{
+//     if(this.loggedIn =true){
+//      if(this.user.id == "111099414700493252194" ){
+//     this.isAdmin = true;
+//   }
+//   if(this.user.id == "105703390204457945598" ){
+//     this.isAdmin = true;
+//   }
+//   if(this.user.id == "113474372826010217045" ){
+//     this.isAdmin = true;
+//   }
+//   if(this.user.id == "111099414700493252194" ){
+//     this.isAdmin = true;
+//   }
+// }
+//    }
 
 
   setGoogleId():void{
