@@ -19,7 +19,6 @@ export class FormComponent {
   newUser: UserInfo = {} as UserInfo;
   doesIdExist: boolean = false;
 
-  //  @Output() eventCreated = new EventEmitter<Userform>();
 
   constructor(
     private _formService: UserformService,
@@ -28,18 +27,56 @@ export class FormComponent {
   ) {}
 
   ngOnInit() {
+    this.doesIdExist = false;
     this.authService.authState.subscribe((user) => {
       this.user = user;
       this.loggedIn = user != null;
-      // this.doesThisPersonExist();
+      if(this.loggedIn == true){
+      this.doesThisPersonExist();
+      }
     });
   }
 
+  doesThisPersonExist():void{
+  console.log("do I exist")
+    this.userinfoservice.getById(this.user.id).subscribe((response: UserInfo)=> {
+      console.log(response);
+      if(response != null){
+        this.doesIdExist = true;
+        this.newUser = response;
+  }
+  else {
+    this.doesIdExist = false;
+  }
+
+      });
+  }
+
+  // doesThisPersonExist():void {
+  //   this.userinfoservice
+  //     .getById(this.user.id)
+  //     .subscribe((response: UserInfo) => {
+  //       console.log(response);
+  //       this.newUser = response;
+  //     })
+  //   if (this.newUser == null) {
+  //     this.doesIdExist = false;
+  //   } else {
+  //           this.doesIdExist = true;
+  //   };
+    
+  // }
+  
   addingEvent(newEvent: Userform): void {
+    this.doesThisPersonExist();
+    if(this.user != null)
+    {
     this.userinfoservice
+    
       .getById(this.user.id)
       .subscribe((response: UserInfo) => {
         console.log(response);
+        if(this.doesIdExist){        
         this.newUser = response;
         newEvent.googleId = this.newUser.googleId;
         newEvent.address = this.newUser.address;
@@ -47,11 +84,20 @@ export class FormComponent {
         newEvent.state = this.newUser.state;
         newEvent.firstName = this.user.firstName;
         newEvent.lastName = this.user.lastName;
+        }
+        
         this._formService.addEvent(newEvent).subscribe((response: Userform) => {
           console.log(response);
           this.eventList.push(response);
+        
         });
-      });
+      
+      });}
+      else{
+        this._formService.addEvent(newEvent).subscribe((response: Userform) => {
+          console.log(response);
+          this.eventList.push(response);
+      })};
     this.e = {} as Userform;
     this.newUser = {} as UserInfo;
   }
@@ -65,26 +111,6 @@ export class FormComponent {
     this.userInfoList = [];
   }
 
-  doesThisPersonExist(): void {
-    if (this.user.id == null) {
-      this.doesIdExist = false;
-    } else {
-      this.userinfoservice
-        .getById(this.user.id)
-        .subscribe((response: UserInfo) => {
-          console.log(response);
-          this.newUser = response;
-
-         // if (response != null) {
-            this.doesIdExist = true;
-          //}
-
-          // else {
-          //   this.doesIdExist = false;
-          // }
-    })};
-    
-  }
 }
 
 // CreateEvent(){

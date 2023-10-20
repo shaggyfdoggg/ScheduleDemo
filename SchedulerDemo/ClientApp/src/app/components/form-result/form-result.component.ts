@@ -17,43 +17,52 @@ export class FormResultComponent {
   isAdmin: boolean = false;
   newUser: UserInfo = {} as UserInfo;
   list: Userform[] = [];
+  doesIdExist: boolean = false;
 
   constructor(private _formService: UserformService, private authService: SocialAuthService, private userinfoservice: UserInfoService) {}
 
   ngOnInit(){
-    this.GetEvents();
+    this.doesIdExist = false;
+    
+    console.log("get events")
     this.authService.authState.subscribe((user) => {
       this.user = user;
       this.loggedIn = (user != null);
+      console.log("setgoogleid")
       this.setGoogleId();
-      //this.admin();
-      this.GetEvents();
+      this.admin();
+      console.log("getevents agains")
     });
+    this.GetEvents();
   }
 
-//   admin():void{
-//     if(this.loggedIn =true){
-//      if(this.user.id == "111099414700493252194" ){
-//     this.isAdmin = true;
-//   }
-//   if(this.user.id == "105703390204457945598" ){
-//     this.isAdmin = true;
-//   }
-//   if(this.user.id == "113474372826010217045" ){
-//     this.isAdmin = true;
-//   }
-//   if(this.user.id == "111099414700493252194" ){
-//     this.isAdmin = true;
-//   }
-// }
-//    }
+  admin():void{
+    if(this.loggedIn =true){
+     if(this.user.id == "111099414700493252194" ){
+    this.isAdmin = true;
+  }
+  if(this.user.id == "105703390204457945598" ){
+    this.isAdmin = true;
+  }
+  if(this.user.id == "113474372826010217045" ){
+    this.isAdmin = true;
+  }
+  if(this.user.id == "111099414700493252194" ){
+    this.isAdmin = true;
+  }
+}
+   }
 
 
   setGoogleId():void{
-    this.userinfoservice.getById(this.user.id).subscribe((response: UserInfo)=> {
-      console.log(response);
-    this.newUser = response;
-    });
+    this.doesThisPersonExist();
+    if(this.loggedIn && this.doesIdExist == true){
+
+      this.userinfoservice.getById(this.user.id).subscribe((response: UserInfo)=> {
+        console.log(response);
+        this.newUser = response;
+      });
+    }
           
   }
 
@@ -83,7 +92,20 @@ export class FormResultComponent {
   
   
   
+  doesThisPersonExist():void{
+    console.log("do I exist")
+      this.userinfoservice.getById(this.user.id).subscribe((response: UserInfo)=> {
+        console.log(response);
+        if(response != null){
+          this.doesIdExist = true;
+          this.newUser = response;
+    }
+    else {
+      this.doesIdExist = false;
+    }
   
+        });
+    }
   
 
 }

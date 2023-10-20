@@ -10,5 +10,5 @@ export interface Userform {
     city?: string;
     state?: string;
     public?: boolean;
-    googleId: string;
+    googleId?: string;
 }
