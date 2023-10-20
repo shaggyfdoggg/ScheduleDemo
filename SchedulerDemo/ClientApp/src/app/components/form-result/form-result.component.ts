@@ -11,7 +11,6 @@ import { UserInfo } from 'src/app/models/user-info';
   styleUrls: ['./form-result.component.css']
 })
 export class FormResultComponent {
-  
   user: SocialUser = {} as SocialUser;
   loggedIn: boolean = false;
   isAdmin: boolean = false;
@@ -19,93 +18,65 @@ export class FormResultComponent {
   list: Userform[] = [];
   doesIdExist: boolean = false;
 
-  constructor(private _formService: UserformService, private authService: SocialAuthService, private userinfoservice: UserInfoService) {}
+  constructor(
+    private _formService: UserformService,
+    private authService: SocialAuthService,
+    private userinfoservice: UserInfoService
+  ) {}
 
-  ngOnInit(){
-    this.doesIdExist = false;
-    
-    console.log("get events")
+  ngOnInit() {
     this.authService.authState.subscribe((user) => {
       this.user = user;
       this.loggedIn = (user != null);
-      console.log("setgoogleid")
       this.setGoogleId();
       this.admin();
-      console.log("getevents agains")
+      
+      // Introduce a 2-second delay before calling GetEvents
+      setTimeout(() => {
+        this.GetEvents();
+      }, 500); // 2000 milliseconds = 2 seconds
     });
-    this.GetEvents();
   }
 
-  admin():void{
-    if(this.loggedIn =true){
-     if(this.user.id == "111099414700493252194" ){
-    this.isAdmin = true;
-  }
-  if(this.user.id == "105703390204457945598" ){
-    this.isAdmin = true;
-  }
-  if(this.user.id == "113474372826010217045" ){
-    this.isAdmin = true;
-  }
-  if(this.user.id == "111099414700493252194" ){
-    this.isAdmin = true;
-  }
-}
-   }
-
-
-  setGoogleId():void{
-    this.doesThisPersonExist();
-    if(this.loggedIn && this.doesIdExist == true){
-
-      this.userinfoservice.getById(this.user.id).subscribe((response: UserInfo)=> {
-        console.log(response);
-        this.newUser = response;
-      });
+  admin(): void {
+    if (this.loggedIn) {
+      if (this.user.id === "111099414700493252194" ||
+          this.user.id === "105703390204457945598" ||
+          this.user.id === "113474372826010217045") {
+        this.isAdmin = true;
+      }
     }
-          
   }
 
-  thisEventIsDeadToMe(id: number):void{
-    this._formService.deleteEvent(id).subscribe((response: Userform)=>{
-      console.log(response)
+  setGoogleId(): void {
+    this.doesThisPersonExist();
+  }
+
+  thisEventIsDeadToMe(id: number): void {
+    this._formService.deleteEvent(id).subscribe((response: Userform) => {
       this.GetEvents();
-      return response;
     });
   }
 
-  GetEvents(): Userform[] {
+  GetEvents(): void {
     this._formService.getAll().subscribe((response: Userform[]) => {
-      console.log(response);
       this.list = response.sort((a, b) => {
         const dateA = a.dateTime instanceof Date ? a.dateTime : new Date(a.dateTime);
-        const dateB = b.dateTime instanceof Date ? b.dateTime : new Date(b.dateTime); 
-        if (isNaN(dateA.getTime()) || isNaN(dateB.getTime())) {        
-          return 0; 
-        }  
+        const dateB = b.dateTime instanceof Date ? b.dateTime : new Date(b.dateTime);
+        if (isNaN(dateA.getTime()) || isNaN(dateB.getTime())) {
+          return 0;
+        }
         return dateA.getTime() - dateB.getTime();
       });
     });
-  
-    return this.list;
   }
-  
-  
-  
-  doesThisPersonExist():void{
-    console.log("do I exist")
-      this.userinfoservice.getById(this.user.id).subscribe((response: UserInfo)=> {
-        console.log(response);
-        if(response != null){
-          this.doesIdExist = true;
-          this.newUser = response;
-    }
-    else {
-      this.doesIdExist = false;
-    }
-  
-        });
-    }
-  
 
+  doesThisPersonExist(): void {
+    this.userinfoservice.getById(this.user.id).subscribe((response: UserInfo) => {
+      this.doesIdExist = response != null;
+      if (this.doesIdExist) {
+        this.newUser = response;
+      }
+    });
+  }
 }
