@@ -42,7 +42,8 @@ export class FormResultComponent {
     if (this.loggedIn) {
       if (this.user.id === "111099414700493252194" ||
           this.user.id === "105703390204457945598" ||
-          this.user.id === "113474372826010217045") {
+          this.user.id === "113474372826010217045" ||
+          this.user.id === "106261488563615030647") {
         this.isAdmin = true;
       }
     }
