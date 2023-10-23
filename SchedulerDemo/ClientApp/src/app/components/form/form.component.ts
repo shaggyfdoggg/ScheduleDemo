@@ -18,6 +18,8 @@ export class FormComponent {
   loggedIn: boolean = false;
   newUser: UserInfo = {} as UserInfo;
   doesIdExist: boolean = false;
+  newInfo: UserInfo ={} as UserInfo ;
+  
 
   constructor(
     private _formService: UserformService,
@@ -26,22 +28,50 @@ export class FormComponent {
   ) {}
 
   ngOnInit() {
-    this.authService.authState.subscribe((user) => {
-      this.user = user;
-      this.loggedIn = user != null;
-      if (this.loggedIn) {
-        this.doesThisPersonExist();
-      }
-    });
-  }
+    setTimeout(() => {
+      this.newInfo.state = "MI";
+      this.newUser.state = "MI";
+      this.authService.authState.subscribe((user) => {
+        this.user = user;
+        this.loggedIn = user != null;
+        
+          this.doesThisPersonExist();
+        })});
+      
+    
+  };
+
 
   doesThisPersonExist(): void {
     this.userinfoservice.getById(this.user.id).subscribe((response: UserInfo) => {
+      
       this.doesIdExist = response != null;
+      console.log("Does this person exist?")
+      console.log(this.doesIdExist)
       if (this.doesIdExist) {
-        this.newUser = response;
-      }
+        this.newUser = response;        
+      }     
     });
+  }
+
+  updatedInfo(newInfo: UserInfo): void{
+    newInfo.googleId = this.user.id;
+    this.userinfoservice.updateUser(newInfo).subscribe((response: UserInfo)=>{
+      console.log(response);
+      this.newUser = response;
+    });
+  }
+
+  newUserInfo(newUser: UserInfo): void {
+    newUser.googleId = this.user.id;
+    if(newUser.address != '' && newUser.city != '' && newUser.state != ''){
+    this.userinfoservice.newUser(newUser).subscribe((response: UserInfo) => {
+      this.userInfoList.push(response);
+      this.doesIdExist = true;
+    });
+    this.userInfoList = [];
+     
+  }
   }
 
   addingEvent(newEvent: Userform): void {
@@ -65,18 +95,9 @@ export class FormComponent {
         this.eventList.push(response);
       });
     }
-
+    
     this.e = {} as Userform;
     this.newUser = {} as UserInfo;
   }
-
-  newUserInfo(newUser: UserInfo): void {
-    newUser.googleId = this.user.id;
-    this.userinfoservice.newUser(newUser).subscribe((response: UserInfo) => {
-      this.userInfoList.push(response);
-    });
-    this.userInfoList = [];
-    this.newUser = {} as UserInfo;
-    this.doesThisPersonExist();
-  }
+  
 }

@@ -16,7 +16,7 @@ namespace SchedulerDemo.Controllers
 
         public List<Userform> All()
         {
-            return dbContext.Userforms.ToList();
+            return dbContext.Userforms.OrderBy(p => p.DateTime).ToList();
         }
 
         [HttpGet("{city}")]
@@ -84,6 +84,14 @@ namespace SchedulerDemo.Controllers
         public Userform UpdateEvent([FromBody] Userform updated)
         {
             Userform c = dbContext.Userforms.FirstOrDefault(d => d.Id == updated.Id);
+            c.Address = updated.Address;
+            c.DateTime = updated.DateTime;
+            c.State = updated.State;
+            c.Description = updated.Description;
+            c.FirstName = updated.FirstName;
+            c.LastName = updated.LastName;
+            c.City = updated.City;
+            c.Public = updated.Public;
             dbContext.Userforms.Update(c);
             dbContext.SaveChanges();
             return c;

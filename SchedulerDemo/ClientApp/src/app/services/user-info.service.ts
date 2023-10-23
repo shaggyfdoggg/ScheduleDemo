@@ -18,4 +18,9 @@ newUser(u:UserInfo):Observable<UserInfo>{
   return this.http.post<UserInfo>(`${this.baseUrl}UserInfo`, u);
 }
 
+updateUser(u:UserInfo):Observable <UserInfo>{
+  return this.http.patch<UserInfo>(`${this.baseUrl}UserInfo`, u);
+}
+
+
 }

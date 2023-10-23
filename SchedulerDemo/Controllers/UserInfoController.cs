@@ -20,9 +20,28 @@ namespace SchedulerDemo.Controllers
         [HttpPost]
           public UserInfo NewUser([FromBody] UserInfo newUser)
         {
-            dbContext.UserInfos.Add(newUser);
-            dbContext.SaveChanges();
+            //UserInfo e = dbContext.UserInfos.FirstOrDefault(i => i.GoogleId == newUser.GoogleId);
+            if (!dbContext.UserInfos.Any(t => t.GoogleId == newUser.GoogleId))
+            {
+                dbContext.UserInfos.Add(newUser);
+                dbContext.SaveChanges();
+            }
+            //could eventually add an error or a route to tell user it already exists in database
             return newUser;
+        }
+
+        [HttpPatch]
+        public UserInfo ChangeInfo([FromBody] UserInfo newInfo) 
+        {
+            UserInfo n = dbContext.UserInfos.FirstOrDefault(p => p.GoogleId == newInfo.GoogleId);
+            n.Address = newInfo.Address;
+            n.City = newInfo.City;
+            n.State = newInfo.State;            
+            dbContext.UserInfos.Update(n);
+            dbContext.SaveChanges();
+            return n;
+
+            
         }
 
 
