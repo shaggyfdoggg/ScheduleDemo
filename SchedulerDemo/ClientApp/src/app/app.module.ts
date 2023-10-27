@@ -37,6 +37,7 @@ import { AboutComponent } from './components/about/about.component';
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'event-list', component: FormResultComponent },
+      { path: 'calendar-list', component: CalenderComponent},
     ])
   ],
   providers: [

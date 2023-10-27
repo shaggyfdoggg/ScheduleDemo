@@ -46,7 +46,7 @@ namespace SchedulerDemo.Controllers
         public List<Userform> GetFiltered(DateTime? date)
         {
             List<Userform> result = new List<Userform>();
-
+            
             //if(time == null)
             //{
 
