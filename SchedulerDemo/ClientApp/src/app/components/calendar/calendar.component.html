@@ -1,0 +1,73 @@
+<div class="month-selector">
+    <label for="selectedMonth">Select Month:</label>
+    <select id="selectedMonth" [(ngModel)]="selectedMonth">
+      <option value="January">January</option>
+      <option value="February">February</option>
+      <option value="March">March</option>
+      <option value="April">April</option>
+      <option value="May">May</option>
+      <option value="June">June</option>
+      <option value="July">July</option>
+      <option value="August">August</option>
+      <option value="September">September</option>
+      <option value="October">October</option>
+      <option value="November">November</option>
+      <option value="December">December</option>
+    </select>
+    <button (click)="changeCalendar()">Change Calendar</button>
+  </div>
+ <br><br><br>
+  
+ <div class="calendar">
+    <div class="month-header">
+      {{ selectedMonth }} {{ currentYear }}
+    </div>
+    
+    <table class="calendar-table">
+      <thead>
+        <tr>
+          <th *ngFor="let day of getDaysOfWeek()">{{ day }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let week of calendarData">
+          <td *ngFor="let day of week">
+            <div class="calendar-day">
+              <div class="day-number"></div>
+              <ul class="events-list">
+                <li *ngFor="let event of day.events">
+                    <p>{{event.event.dateTime | date}}</p>
+                  {{ event.event.description }} - {{ event.time }} 
+                </li>
+                <li *ngIf="day.events.length === 0">No events</li>
+              </ul>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+ 
+  
+  <br><br><br>
+  
+
+
+  
+ 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  

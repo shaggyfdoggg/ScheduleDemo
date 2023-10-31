@@ -14,6 +14,7 @@ import { FormComponent } from './components/form/form.component';
 import { FormResultComponent } from './components/form-result/form-result.component';
 import { CalenderComponent } from './components/calender/calender.component';
 import { AboutComponent } from './components/about/about.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { AboutComponent } from './components/about/about.component';
     FormComponent,
     FormResultComponent,
     CalenderComponent,
-    AboutComponent
+    AboutComponent,
+    CalendarComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -38,6 +40,7 @@ import { AboutComponent } from './components/about/about.component';
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'event-list', component: FormResultComponent },
       { path: 'calendar-list', component: CalenderComponent},
+      { path: 'calendar', component: CalendarComponent}
     ])
   ],
   providers: [
