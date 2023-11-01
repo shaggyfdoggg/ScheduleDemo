@@ -102,9 +102,12 @@ export class FormComponent {
 
     console.log(newEvent)
 
-    let newNewDate: Date = newEvent.dateTime
-       let newDate = new Date(newNewDate.getTime() + 30 * 60000)
-    newEvent.endDateTime =  newDate
+    let newNewDate: Date = new Date(newEvent.dateTime);
+    let timestamp = newNewDate.getTime() + 30 * 60000;
+    newEvent.endDateTime = new Date(timestamp);
+  console.log(newNewDate)
+  console.log(timestamp)
+  console.log(newEvent.endDateTime)
 
     this.alreadyExists = false;
 
@@ -117,7 +120,9 @@ export class FormComponent {
         this.alreadyExists = true;
         console.log("enterning else")
       }
-      if (this.user && (this.alreadyExists == true)) {
+    }
+      if (this.user && (this.alreadyExists == false)) {
+        console.log('second if is working')
         this.userinfoservice.getById(this.user.id).subscribe((response: UserInfo) => {
         if (this.doesIdExist) {
           this.newUser = response;
@@ -132,7 +137,8 @@ export class FormComponent {
           this.eventList.push(response);
         });
       });
-    } else if(this.alreadyExists == true) {
+    }
+     else if(this.alreadyExists == false) {
       this._formService.addEvent(newEvent).subscribe((response: Userform) => {
         this.eventList.push(response);
       });
@@ -140,8 +146,7 @@ export class FormComponent {
     
     this.e = {} as Userform;
     this.newUser = {} as UserInfo;
+    this.GetEvents();
   }
-  this.GetEvents();
 
-}
 }
