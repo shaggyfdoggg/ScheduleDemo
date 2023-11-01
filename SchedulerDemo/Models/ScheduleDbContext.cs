@@ -67,6 +67,9 @@ public partial class ScheduleDbContext : DbContext
             entity.Property(e => e.Description)
                 .HasMaxLength(3000)
                 .HasColumnName("description");
+            entity.Property(e => e.EndDateTime)
+                .HasColumnType("datetime")
+                .HasColumnName("endDateTime");
             entity.Property(e => e.FirstName)
                 .HasMaxLength(255)
                 .HasColumnName("firstName");

@@ -11,4 +11,5 @@ export interface Userform {
     state?: string;
     public?: boolean;
     googleId?: string;
+    endDateTime: Date;
 }

@@ -24,4 +24,6 @@ public partial class Userform
     public bool? Public { get; set; }
 
     public string? GoogleId { get; set; }
+
+    public DateTime? EndDateTime { get; set; }
 }

@@ -19,7 +19,7 @@ export class FormComponent {
   newUser: UserInfo = {} as UserInfo;
   doesIdExist: boolean = false;
   newInfo: UserInfo ={} as UserInfo ;
-  
+  alreadyExists: boolean =false;
 
   constructor(
     private _formService: UserformService,
@@ -34,12 +34,24 @@ export class FormComponent {
       this.authService.authState.subscribe((user) => {
         this.user = user;
         this.loggedIn = user != null;
-        
+        this.GetEvents();
           this.doesThisPersonExist();
         })});
       
     
   };
+  GetEvents(): void {
+    this._formService.getAll().subscribe((response: Userform[]) => {
+      this.eventList = response.sort((a, b) => {
+        const dateA = a.dateTime instanceof Date ? a.dateTime : new Date(a.dateTime);
+        const dateB = b.dateTime instanceof Date ? b.dateTime : new Date(b.dateTime);
+        if (isNaN(dateA.getTime()) || isNaN(dateB.getTime())) {
+          return 0;
+        }
+        return dateA.getTime() - dateB.getTime();
+      });
+    });
+  }
 
 
   doesThisPersonExist(): void {
@@ -74,9 +86,39 @@ export class FormComponent {
   }
   }
 
+
+   isEventOverlapping(existingEvent: Userform, newEvent: Userform):boolean {
+     if(existingEvent.dateTime <= newEvent.endDateTime &&
+      existingEvent.endDateTime >= newEvent.dateTime)  
+      {    
+       return true;
+      }
+
+    else{
+      return false;
+    }
+  };
   addingEvent(newEvent: Userform): void {
-    if (this.user) {
-      this.userinfoservice.getById(this.user.id).subscribe((response: UserInfo) => {
+
+    console.log(newEvent)
+
+    let newNewDate: Date = newEvent.dateTime
+       let newDate = new Date(newNewDate.getTime() + 30 * 60000)
+    newEvent.endDateTime =  newDate
+
+    this.alreadyExists = false;
+
+    console.log(this.eventList)
+    for (let existingEvent of this.eventList) {
+      if (!this.isEventOverlapping(existingEvent, newEvent)) {
+      console.log("entering if")     
+    }
+      else{
+        this.alreadyExists = true;
+        console.log("enterning else")
+      }
+      if (this.user && (this.alreadyExists == true)) {
+        this.userinfoservice.getById(this.user.id).subscribe((response: UserInfo) => {
         if (this.doesIdExist) {
           this.newUser = response;
           newEvent.googleId = this.newUser.googleId;
@@ -90,7 +132,7 @@ export class FormComponent {
           this.eventList.push(response);
         });
       });
-    } else {
+    } else if(this.alreadyExists == true) {
       this._formService.addEvent(newEvent).subscribe((response: Userform) => {
         this.eventList.push(response);
       });
@@ -99,5 +141,7 @@ export class FormComponent {
     this.e = {} as Userform;
     this.newUser = {} as UserInfo;
   }
-  
+  this.GetEvents();
+
+}
 }

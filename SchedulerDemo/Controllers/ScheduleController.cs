@@ -62,14 +62,35 @@ namespace SchedulerDemo.Controllers
             return result; 
         }
 
-        [HttpPost]
 
+        [HttpPost]
         public Userform NewEvent([FromBody] Userform newEvent)
         {
-            dbContext.Userforms.Add(newEvent);
-            dbContext.SaveChanges();
-            return newEvent;
+            if (dbContext.Userforms.Any(e => e.DateTime <= newEvent.EndDateTime && e.EndDateTime >= newEvent.DateTime))
+            {
+                // There is a conflicting event, so don't allow the new event to be booked.
+                Console.WriteLine("The selected time slot is already booked. Please choose a different time.");
+                // You can return an error message to the user or handle the conflict in your application.
+            }
+            else
+            {
+                // No conflicting events, so it's safe to book the new event.
+                dbContext.Userforms.Add(newEvent); // Add the new event to the database.
+                dbContext.SaveChanges(); // Save changes to the database.
+                Console.WriteLine("Event successfully booked.");
+                // You can provide a success message or any other actions you want to perform.
+            }
+                return newEvent;
         }
+
+        //[HttpPost]
+
+        //public Userform NewEvent([FromBody] Userform newEvent)
+        //{
+        //    dbContext.Userforms.Add(newEvent);
+        //    dbContext.SaveChanges();
+        //    return newEvent;
+        //}
 
         [HttpDelete("{id}")]
         public Userform DeleteEvent(int id)

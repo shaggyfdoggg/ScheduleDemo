@@ -223,6 +223,10 @@
 	<option value="WY">Wyoming</option>
 </select>
 </div>
-<button [routerLink]="['event-list']" (click)="addingEvent(e)">Submit</button>
+<button (click)="addingEvent(e)">Submit</button>
+
+</div>
+<div *ngIf="alreadyExists == true">
+	<p>This time slot is full, please select another time</p>
 </div>
 <!-- [routerLink]="['event-list']" -->
