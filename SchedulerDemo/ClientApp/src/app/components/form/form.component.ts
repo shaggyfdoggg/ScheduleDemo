@@ -20,6 +20,8 @@ export class FormComponent {
   doesIdExist: boolean = false;
   newInfo: UserInfo ={} as UserInfo ;
   alreadyExists: boolean =false;
+  currentDate: Date = new Date();
+  isInFuture: boolean = true;
 
   constructor(
     private _formService: UserformService,
@@ -101,9 +103,20 @@ export class FormComponent {
     }
   };
 
+futureEventOnly(newEvent: Date): boolean{
+  if(newEvent < this.currentDate)
+  {
+    this.isInFuture = false;
+    return false;
+  }
+  else{
+    this.isInFuture = true;
+    return true;
+  }
+}
+
 
   addingEvent(newEvent: Userform): void {
-       
         console.log(newEvent)
     let newNewDate: Date = new Date(newEvent.dateTime);
     let timestamp = newNewDate.getTime() + 30 * 60000;
@@ -113,6 +126,7 @@ export class FormComponent {
   console.log(newEvent.endDateTime)
   console.log(this.eventList)
     this.alreadyExists = false;
+    if(this.futureEventOnly(newNewDate) == true){
 
     for (let existingEvent of this.eventList) {
       if (!this.isEventOverlapping(existingEvent, newEvent)) {
@@ -149,7 +163,9 @@ export class FormComponent {
     else if(this.alreadyExists === true){
       console.log('bool is working')
     }
-    
+  }
+
+
     this.e = {} as Userform;
     this.newUser = {} as UserInfo;
     this.GetEvents();

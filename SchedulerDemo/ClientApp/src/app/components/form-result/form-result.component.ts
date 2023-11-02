@@ -17,6 +17,9 @@ export class FormResultComponent {
   newUser: UserInfo = {} as UserInfo;
   list: Userform[] = [];
   doesIdExist: boolean = false;
+ //currentDate: Date = new Date;
+  pastEventList: Userform[] =[];
+  deletedEvents: Userform = {} as Userform;
 
   constructor(
     private _formService: UserformService,
@@ -30,6 +33,7 @@ export class FormResultComponent {
       this.loggedIn = (user != null);
       this.setGoogleId();
       this.admin();
+      this.deletePastEvents();
       
       // Introduce a 2-second delay before calling GetEvents
       setTimeout(() => {
@@ -52,6 +56,54 @@ export class FormResultComponent {
   setGoogleId(): void {
     this.doesThisPersonExist();
   }
+
+  deletePastEvents(): void {
+    let pastDate = new Date();
+    let fourteenDaysAgo = new Date(pastDate.getTime() - 14 * 24 * 60 * 60 * 1000);
+  
+    this._formService.getAll().subscribe((response: Userform[]) => {
+      this.pastEventList = response;
+      console.log("Past Events:", this.pastEventList);
+
+      for (let e of this.pastEventList) {
+        let newNewNewDate = new Date(e.dateTime);
+        let newDate = newNewNewDate.getTime();
+        e.dateTime = new Date(newDate);
+        console.log("Event Date:", e.dateTime);
+        console.log("Fourteen Days Ago:", fourteenDaysAgo);
+        
+        if (e.dateTime < fourteenDaysAgo) {
+          console.log("Deleting event?");
+          this._formService.deleteEvent(e.id).subscribe((response: Userform) => {
+            this.deletedEvents = response;
+            console.log("Deleted Event:", this.deletedEvents);
+          });
+        }
+      }
+    });
+  }
+  
+
+// deletePastEvents(): void{
+// let pastDate = new Date();
+// let fourteenDaysAgo = new Date(pastDate.getTime() - 14 * 24 * 60 * 60 * 1000);
+
+//   this._formService.getAll().subscribe((response:Userform[]) => {
+//       this.pastEventList = response;
+
+//   });
+//   for(let e of this.pastEventList){
+//     let newNewDate: Date = new Date(e.dateTime);
+//     if(newNewDate < fourteenDaysAgo)
+//     {
+//       console.log("deleting event?");
+//     this._formService.deleteEvent(e.id).subscribe((response:Userform) => {
+//     this.deletedEvents = response;
+//     });
+//   }
+//   }
+//   }
+
 
   thisEventIsDeadToMe(id: number): void {
     this._formService.deleteEvent(id).subscribe((response: Userform) => {

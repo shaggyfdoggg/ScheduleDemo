@@ -229,4 +229,7 @@
 <div *ngIf="alreadyExists == true">
 	<p>This time slot is full, please select another time</p>
 </div>
+<div *ngIf="isInFuture == false">
+	<p>The selected date is in the past. Please choose another option. </p>
+</div>
 <!-- [routerLink]="['event-list']" -->
