@@ -1,0 +1,10 @@
+<td>
+    <div>
+      {{ day.date.getDate() }}
+      <ul *ngIf="day.events.length > 0">
+        <li *ngFor="let event of day.events">
+          {{ event.event.description }} - {{ event.time }}
+        </li>
+      </ul>
+    </div>
+  </td>

@@ -36,10 +36,10 @@ export class FormResultComponent {
       this.deletePastEvents();
       
       // Introduce a 2-second delay before calling GetEvents
-      setTimeout(() => {
-        this.GetEvents();
-      }, 500); // 2000 milliseconds = 2 seconds
     });
+    setTimeout(() => {
+      this.GetEvents();
+    }, 500); // 2000 milliseconds = 2 seconds
   }
 
   admin(): void {

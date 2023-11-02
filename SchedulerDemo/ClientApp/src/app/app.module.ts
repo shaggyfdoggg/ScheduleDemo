@@ -15,6 +15,7 @@ import { FormResultComponent } from './components/form-result/form-result.compon
 import { CalenderComponent } from './components/calender/calender.component';
 import { AboutComponent } from './components/about/about.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
+import { DayComponent } from './components/day/day.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { CalendarComponent } from './components/calendar/calendar.component';
     FormResultComponent,
     CalenderComponent,
     AboutComponent,
-    CalendarComponent
+    CalendarComponent,
+    DayComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

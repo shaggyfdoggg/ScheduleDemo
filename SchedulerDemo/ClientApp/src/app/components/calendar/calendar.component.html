@@ -1,4 +1,5 @@
 <div class="month-selector">
+  <div class="label-select">
     <label for="selectedMonth">Select Month:</label>
     <select id="selectedMonth" [(ngModel)]="selectedMonth">
       <option value="January">January</option>
@@ -14,105 +15,106 @@
       <option value="November">November</option>
       <option value="December">December</option>
     </select>
-   
-  <!-- </div>
+  </div>
 
-  <div class="month-selector"> -->
-    <label for="selectedMonth">Select Year:</label>
-  <select class="form-select" id="year" name="year" [(ngModel)]="currentYear">
-    <option value="">year</option>
-    <option value="2023">2023</option>
-    <option value="2024">2024</option>
-    <option value="2025">2025</option>
-    <option value="2026">2026</option>
-    <option value="2027">2027</option>
-    <option value="2028">2028</option>
-    <option value="2029">2029</option>
-    <option value="2030">2030</option>
-</select>
-<button (click)="changeCalendar()">Change Calendar</button>
+  <div class="label-select">
+    <label for="selectedYear">Select Year:</label>
+    <select id="year" name="year" [(ngModel)]="currentYear">
+      <option value="">year</option>
+      <option value="2023">2023</option>
+      <option value="2024">2024</option>
+      <option value="2025">2025</option>
+      <option value="2026">2026</option>
+      <option value="2027">2027</option>
+      <option value="2028">2028</option>
+      <option value="2029">2029</option>
+      <option value="2030">2030</option>
+    </select>
+  </div>
+
+  <button (click)="changeCalendar()">Change Calendar</button>
 </div>
- <br><br><br>
-  
- <div class="calendar">
-    <div class="month-header">
-      {{ selectedMonth }} {{ currentYear }}
-    </div>
-    
-<!-- calendar.component.html -->
 
-<table>
-  <thead>
-    <tr>
+<br /><br /><br />
+
+<p>This is the regular calendar </p>
+
+<div class="calendar">
+  <div class="month-header">{{ selectedMonth }} {{ currentYear }}</div>
+  <table>
+    <thead>
+      <tr></tr>
       <tr>
         <th *ngFor="let day of getDaysOfWeek()">{{ day }}</th>
       </tr>
-    
-  </thead>
-  <tbody *ngFor="let week of calendarData; let rowIndex = index">
-    <tr>
-      <td *ngFor="let day of week; let colIndex = index">
-        <div>
-          {{ day.date.getDate() }}
-          <ul>
-            <li *ngFor="let event of day.events">
-              {{ event.event.description }} - {{ event.time }}
-            </li>
-          </ul>
-        </div>
-      </td>
-    </tr>
-  </tbody>
-</table>
+    </thead>
+    <tbody *ngFor="let week of calendarData; let rowIndex = index">
+      <tr>
+        <td *ngFor="let day of week; let colIndex = index">
+          <div>
+            {{ day.date.getDate() }}
+            <ul>
+              <li *ngFor="let event of day.events">
+                {{ event.event.description }} - {{ event.time }}
+              </li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 
-
-  </div>
-
- 
-  
-  <br><br><br>
-
-      <!-- <table class="calendar-table">
-      <thead>
-        <tr>
-          <th *ngFor="let day of getDaysOfWeek()">{{ day }}</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let week of calendarData">
-          <td *ngFor="let day of week">
-            <div class="calendar-day">
-              <div class="day-number"></div>
-              <ul class="events-list">
-                <li *ngFor="let event of day.events">
-                    <p>{{event.event.dateTime | date}}</p>
-                  {{ event.event.description }} - {{ event.time }} 
-                </li>
-                <li *ngIf="day.events.length === 0">No events</li>
-              </ul>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table> -->
-  
-
-
-  
- 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
+<br /><br /><br />
+<p>This is the calendar to click on specific days of the month</p>
+<div class="calendar">
+  <div class="month-header">{{ selectedMonth }} {{ currentYear }}</div>
+  <table>
+    <thead>
+      <tr>
+        <th *ngFor="let day of getDaysOfWeek()">{{ day }}</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let week of calendarData; let rowIndex = index">
+      <tr>
+        <td *ngFor="let day of week; let colIndex = index">
+          <div (click)="selectDay(day)">
+            {{ day.date.getDate() }}
+            <ul *ngIf="day.events.length > 0 && day === selectedDay">
+              <li *ngFor="let event of day.events">
+                {{ event.event.description }} - {{ event.time }}
+              </li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br><br>
+<p>This is the calendar to click on specific weeks</p>
+<div class="calendar">
+  <div class="month-header">{{ selectedMonth }} {{ currentYear }}</div>
+  <table>
+    <thead>
+      <tr>
+        <th *ngFor="let day of getDaysOfWeek()">{{ day }}</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let week of calendarData; let rowIndex = index">
+      <tr (click)="selectWeek(week)">
+        <td *ngFor="let day of week; let colIndex = index">
+          <div>
+            {{ day.date.getDate() }}
+            <ul *ngIf="day.events.length > 0 && isSelectedWeek(week)">
+              <li *ngFor="let event of day.events">
+                {{ event.event.description }} - {{ event.time }}
+              </li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

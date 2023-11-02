@@ -155,9 +155,13 @@
 <br>
 </div>
 <p>Date</p>
-<input type="datetime-local" placeholder="Date" [(ngModel)]="e.dateTime" />
-<!-- <p>Time</p>
-<input type="time" placeholder="Time" [(ngModel)]="e.dateTime" /> -->
+<input type="date" placeholder="Date" [(ngModel)]="selectedDate" [min]="cutOffDate" />
+<p>Time</p>
+<select [(ngModel)]="selectedTime">
+	<option *ngFor="let time of timeIntervals" [value]="time" placeholder="12:00">{{ time }}</option>
+  </select>
+  
+
 <p>Description</p>
 <input type="text" placeholder="Description" [(ngModel)]="e.description" />
 

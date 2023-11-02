@@ -22,12 +22,21 @@ export class FormComponent {
   alreadyExists: boolean =false;
   currentDate: Date = new Date();
   isInFuture: boolean = true;
+  currentDateTime: string;
+  cutOffDate: string =this.getCurrentDate();
+  selectedTime: string = '';
+  timeIntervals: string[] = this.generateTimeIntervals();
+  selectedDate: string = ''; // Initialize with an empty string
+
 
   constructor(
     private _formService: UserformService,
     private authService: SocialAuthService,
     private userinfoservice: UserInfoService
-  ) {}
+  ) {
+    const now = new Date();
+    this.currentDateTime = now.toISOString().slice(0, 16);
+  }
 
   ngOnInit() {
     setTimeout(() => {
@@ -42,6 +51,37 @@ export class FormComponent {
       
     
   };
+
+  getCurrentDate(): string {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = `${now.getMonth() + 1}`.padStart(2, '0');
+    const day = `${now.getDate()}`.padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+
+  generateTimeIntervals(): string[] {
+    const intervals = [];
+    const startTime = new Date();
+    startTime.setHours(0, 0, 0, 0);
+
+    for (let i = 0; i < 96; i++) { // 96 intervals for a 24-hour day
+      intervals.push(startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+      startTime.setMinutes(startTime.getMinutes() + 15);
+    }
+
+    return intervals;
+  }
+
+  updateDateTime() {
+    // Combine the selected date and time into e.dateTime
+    const selectedDate = new Date(this.selectedDate);
+    const selectedTimeParts = this.selectedTime.split(':');
+    selectedDate.setHours(parseInt(selectedTimeParts[0], 10), parseInt(selectedTimeParts[1], 10));
+    
+    this.e.dateTime = selectedDate; 
+  }
+
   GetEvents(): void {
     this._formService.getAll().subscribe((response: Userform[]) => {
       this.eventList = response.sort((a, b) => {
@@ -117,6 +157,7 @@ futureEventOnly(newEvent: Date): boolean{
 
 
   addingEvent(newEvent: Userform): void {
+    this.updateDateTime();
         console.log(newEvent)
     let newNewDate: Date = new Date(newEvent.dateTime);
     let timestamp = newNewDate.getTime() + 30 * 60000;
