@@ -14,8 +14,24 @@
       <option value="November">November</option>
       <option value="December">December</option>
     </select>
-    <button (click)="changeCalendar()">Change Calendar</button>
-  </div>
+   
+  <!-- </div>
+
+  <div class="month-selector"> -->
+    <label for="selectedMonth">Select Year:</label>
+  <select class="form-select" id="year" name="year" [(ngModel)]="currentYear">
+    <option value="">year</option>
+    <option value="2023">2023</option>
+    <option value="2024">2024</option>
+    <option value="2025">2025</option>
+    <option value="2026">2026</option>
+    <option value="2027">2027</option>
+    <option value="2028">2028</option>
+    <option value="2029">2029</option>
+    <option value="2030">2030</option>
+</select>
+<button (click)="changeCalendar()">Change Calendar</button>
+</div>
  <br><br><br>
   
  <div class="calendar">
@@ -23,7 +39,41 @@
       {{ selectedMonth }} {{ currentYear }}
     </div>
     
-    <table class="calendar-table">
+<!-- calendar.component.html -->
+
+<table>
+  <thead>
+    <tr>
+      <tr>
+        <th *ngFor="let day of getDaysOfWeek()">{{ day }}</th>
+      </tr>
+    
+  </thead>
+  <tbody *ngFor="let week of calendarData; let rowIndex = index">
+    <tr>
+      <td *ngFor="let day of week; let colIndex = index">
+        <div>
+          {{ day.date.getDate() }}
+          <ul>
+            <li *ngFor="let event of day.events">
+              {{ event.event.description }} - {{ event.time }}
+            </li>
+          </ul>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+  </div>
+
+ 
+  
+  <br><br><br>
+
+      <!-- <table class="calendar-table">
       <thead>
         <tr>
           <th *ngFor="let day of getDaysOfWeek()">{{ day }}</th>
@@ -45,12 +95,7 @@
           </td>
         </tr>
       </tbody>
-    </table>
-  </div>
-
- 
-  
-  <br><br><br>
+    </table> -->
   
 
 

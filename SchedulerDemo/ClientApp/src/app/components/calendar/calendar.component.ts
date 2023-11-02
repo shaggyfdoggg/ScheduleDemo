@@ -169,19 +169,14 @@ export class CalendarComponent implements OnInit {
   }
 
 
-  initializeCalendar() {
-    let today = new Date(this.currentYear, this.getMonthNumber(this.selectedMonth), 1);
-    this.daysInMonth = this.getDaysOfWeek();
-    this.calendarData = this.buildCalendarData(today);
-  }
-
-
-
   buildCalendarData(date: Date): { date: Date; events: { event: Userform, time: string }[] }[][] {
     const calendarData: { date: Date; events: { event: Userform, time: string }[] }[][] = [];
   
     const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-    let currentDay = new Date(firstDay);
+    const currentDay = new Date(firstDay);
+  
+    // Adjust currentDay to the first day of the week that includes the first day of the month
+    currentDay.setDate(1 - (firstDay.getDay() + 6) % 7);
   
     for (let week = 0; week < 5; week++) {
       calendarData[week] = [];
@@ -209,6 +204,48 @@ export class CalendarComponent implements OnInit {
   
     return calendarData;
   }
+  
+
+  initializeCalendar() {
+    let today = new Date(this.currentYear, this.getMonthNumber(this.selectedMonth), 1);
+    this.daysInMonth = this.getDaysOfWeek();
+    this.calendarData = this.buildCalendarData(today);
+  }
+
+
+
+  // buildCalendarData(date: Date): { date: Date; events: { event: Userform, time: string }[] }[][] {
+  //   const calendarData: { date: Date; events: { event: Userform, time: string }[] }[][] = [];
+  
+  //   const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+  //   let currentDay = new Date(firstDay);
+  
+  //   for (let week = 0; week < 5; week++) {
+  //     calendarData[week] = [];
+  //     for (let dayOfWeek = 0; dayOfWeek < 7; dayOfWeek++) {
+  //       calendarData[week][dayOfWeek] = {
+  //         date: new Date(currentDay),
+  //         events: []
+  //       };
+  //       currentDay.setDate(currentDay.getDate() + 1);
+  //     }
+  //   }
+  
+  //   for (const event of this.events) {
+  //     const eventDate = new Date(event.dateTime);
+  //     if (eventDate.getMonth() === date.getMonth() && eventDate.getFullYear() === date.getFullYear()) {
+  //       const dayOfMonth = eventDate.getDate();
+  //       const weekIndex = Math.floor((dayOfMonth - 1) / 7);
+  //       const dayOfWeek = eventDate.getDay();
+  //       calendarData[weekIndex][dayOfWeek].events.push({
+  //         event: event,
+  //         time: eventDate.toLocaleTimeString()
+  //       });
+  //     }
+  //   }
+  
+  //   return calendarData;
+  // }
 
 
 
