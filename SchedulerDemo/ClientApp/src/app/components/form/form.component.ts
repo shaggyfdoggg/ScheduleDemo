@@ -88,9 +88,11 @@ export class FormComponent {
 
 
    isEventOverlapping(existingEvent: Userform, newEvent: Userform):boolean {
-     if(existingEvent.dateTime <= newEvent.endDateTime &&
-      existingEvent.endDateTime >= newEvent.dateTime)  
+     if((existingEvent.dateTime <= newEvent.dateTime && existingEvent.endDateTime >= newEvent.dateTime) || 
+      (existingEvent.dateTime <= newEvent.endDateTime && existingEvent.endDateTime >= newEvent.endDateTime ))  
       {    
+        this.alreadyExists = true;
+        console.log('Is event working is working')
        return true;
       }
 
@@ -98,30 +100,31 @@ export class FormComponent {
       return false;
     }
   };
+
+
   addingEvent(newEvent: Userform): void {
-
-    console.log(newEvent)
-
+       
+        console.log(newEvent)
     let newNewDate: Date = new Date(newEvent.dateTime);
     let timestamp = newNewDate.getTime() + 30 * 60000;
     newEvent.endDateTime = new Date(timestamp);
   console.log(newNewDate)
   console.log(timestamp)
   console.log(newEvent.endDateTime)
-
+  console.log(this.eventList)
     this.alreadyExists = false;
 
-    console.log(this.eventList)
     for (let existingEvent of this.eventList) {
       if (!this.isEventOverlapping(existingEvent, newEvent)) {
       console.log("entering if")     
     }
       else{
         this.alreadyExists = true;
-        console.log("enterning else")
+        console.log("entering else")
       }
     }
-      if (this.user && (this.alreadyExists == false)) {
+
+      if ((this.user) && (this.alreadyExists === false)) {
         console.log('second if is working')
         this.userinfoservice.getById(this.user.id).subscribe((response: UserInfo) => {
         if (this.doesIdExist) {
@@ -138,10 +141,13 @@ export class FormComponent {
         });
       });
     }
-     else if(this.alreadyExists == false) {
+     else if(this.alreadyExists === false) {
       this._formService.addEvent(newEvent).subscribe((response: Userform) => {
         this.eventList.push(response);
       });
+    }
+    else if(this.alreadyExists === true){
+      console.log('bool is working')
     }
     
     this.e = {} as Userform;
