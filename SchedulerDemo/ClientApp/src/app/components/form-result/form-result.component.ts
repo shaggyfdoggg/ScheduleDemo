@@ -82,27 +82,6 @@ export class FormResultComponent {
       }
     });
   }
-  
-
-// deletePastEvents(): void{
-// let pastDate = new Date();
-// let fourteenDaysAgo = new Date(pastDate.getTime() - 14 * 24 * 60 * 60 * 1000);
-
-//   this._formService.getAll().subscribe((response:Userform[]) => {
-//       this.pastEventList = response;
-
-//   });
-//   for(let e of this.pastEventList){
-//     let newNewDate: Date = new Date(e.dateTime);
-//     if(newNewDate < fourteenDaysAgo)
-//     {
-//       console.log("deleting event?");
-//     this._formService.deleteEvent(e.id).subscribe((response:Userform) => {
-//     this.deletedEvents = response;
-//     });
-//   }
-//   }
-//   }
 
 
   thisEventIsDeadToMe(id: number): void {

@@ -34,7 +34,7 @@ export class FormComponent {
     private authService: SocialAuthService,
     private userinfoservice: UserInfoService
   ) {
-    const now = new Date();
+    let now = new Date();
     this.currentDateTime = now.toISOString().slice(0, 16);
   }
 
@@ -53,16 +53,16 @@ export class FormComponent {
   };
 
   getCurrentDate(): string {
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = `${now.getMonth() + 1}`.padStart(2, '0');
-    const day = `${now.getDate()}`.padStart(2, '0');
+    let now = new Date();
+    let year = now.getFullYear();
+    let month = `${now.getMonth() + 1}`.padStart(2, '0');
+    let day = `${now.getDate()}`.padStart(2, '0');
     return `${year}-${month}-${day}`;
   }
 
   generateTimeIntervals(): string[] {
-    const intervals = [];
-    const startTime = new Date();
+    let intervals = [];
+    let startTime = new Date();
     startTime.setHours(0, 0, 0, 0);
 
     for (let i = 0; i < 96; i++) { // 96 intervals for a 24-hour day
@@ -73,14 +73,31 @@ export class FormComponent {
     return intervals;
   }
 
+  // updateDateTime() {
+  //   // Combine the selected date and time into e.dateTime
+  //   const selectedDate = new Date(this.selectedDate);
+  //   const selectedTimeParts = this.selectedTime.split(':');
+  //   selectedDate.setHours(parseInt(selectedTimeParts[0], 10), parseInt(selectedTimeParts[1], 10));
+    
+  //   this.e.dateTime = selectedDate; 
+  // }
+
   updateDateTime() {
     // Combine the selected date and time into e.dateTime
     const selectedDate = new Date(this.selectedDate);
     const selectedTimeParts = this.selectedTime.split(':');
-    selectedDate.setHours(parseInt(selectedTimeParts[0], 10), parseInt(selectedTimeParts[1], 10));
-    
-    this.e.dateTime = selectedDate; 
+    const hours = parseInt(selectedTimeParts[0], 10);
+    const minutes = parseInt(selectedTimeParts[1], 10);
+  
+    // Add one day to the selected date
+    selectedDate.setDate(selectedDate.getDate() + 1);
+  
+    // Set the time without changing it
+    selectedDate.setHours(hours, minutes, 0, 0);
+  
+    this.e.dateTime = selectedDate;
   }
+
 
   GetEvents(): void {
     this._formService.getAll().subscribe((response: Userform[]) => {
