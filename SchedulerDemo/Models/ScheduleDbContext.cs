@@ -15,6 +15,8 @@ public partial class ScheduleDbContext : DbContext
     {
     }
 
+    public virtual DbSet<BusinessOwner> BusinessOwners { get; set; }
+
     public virtual DbSet<Calendar> Calendars { get; set; }
 
     public virtual DbSet<UserInfo> UserInfos { get; set; }
@@ -23,10 +25,28 @@ public partial class ScheduleDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=schedulerdemo.database.windows.net; Initial Catalog=ScheduleDB; User Id=FOS; Password=C#July2023");
+        => optionsBuilder.UseSqlServer(secret.optbuild);
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<BusinessOwner>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Business__3214EC278BF58D72");
+
+            entity.ToTable("BusinessOwner");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.Address).HasMaxLength(255);
+            entity.Property(e => e.BusinessGoogleId)
+                .HasMaxLength(255)
+                .HasColumnName("BusinessGoogleID");
+            entity.Property(e => e.BusinessName).HasMaxLength(255);
+            entity.Property(e => e.City).HasMaxLength(255);
+            entity.Property(e => e.EmployeeName).HasMaxLength(255);
+            entity.Property(e => e.Services).HasMaxLength(255);
+            entity.Property(e => e.State).HasMaxLength(255);
+        });
+
         modelBuilder.Entity<Calendar>(entity =>
         {
             entity.HasKey(e => e.CalendarDate).HasName("PK__Calendar__BEFC44DA5891631B");
@@ -58,6 +78,9 @@ public partial class ScheduleDbContext : DbContext
             entity.Property(e => e.Address)
                 .HasMaxLength(255)
                 .HasColumnName("address");
+            entity.Property(e => e.BusinessGoogleId)
+                .HasMaxLength(255)
+                .HasColumnName("BusinessGoogleID");
             entity.Property(e => e.City)
                 .HasMaxLength(255)
                 .HasColumnName("city");

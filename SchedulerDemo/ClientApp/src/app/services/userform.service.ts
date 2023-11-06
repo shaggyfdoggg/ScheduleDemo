@@ -3,6 +3,7 @@ import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Userform } from '../models/userform';
 import { Time } from '@angular/common';
+import { BusinessOwner } from '../models/business-owner';
 
 @Injectable({
   providedIn: 'root'
@@ -42,6 +43,10 @@ export class UserformService {
 
   updateEvent(e: Userform): Observable<Userform>{
     return this.http.patch<Userform>(`${this.baseUrl}Schedule`, e);
+  }
+
+  getByBusinessName(businessGoogleId:string): Observable<BusinessOwner[]>{
+    return this.http.get<BusinessOwner[]>(`${this.baseUrl}Schedule/${businessGoogleId}`);
   }
 
 

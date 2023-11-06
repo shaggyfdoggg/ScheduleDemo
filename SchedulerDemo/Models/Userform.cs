@@ -26,4 +26,6 @@ public partial class Userform
     public string? GoogleId { get; set; }
 
     public DateTime? EndDateTime { get; set; }
+
+    public string? BusinessGoogleId { get; set; }
 }
