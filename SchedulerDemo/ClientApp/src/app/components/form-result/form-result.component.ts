@@ -17,7 +17,6 @@ export class FormResultComponent {
   newUser: UserInfo = {} as UserInfo;
   list: Userform[] = [];
   doesIdExist: boolean = false;
- //currentDate: Date = new Date;
   pastEventList: Userform[] =[];
   deletedEvents: Userform = {} as Userform;
 
@@ -35,11 +34,11 @@ export class FormResultComponent {
       this.admin();
       this.deletePastEvents();
       
-      // Introduce a 2-second delay before calling GetEvents
+      
     });
     setTimeout(() => {
       this.GetEvents();
-    }, 500); // 2000 milliseconds = 2 seconds
+    }, 500); 
   }
 
   admin(): void {

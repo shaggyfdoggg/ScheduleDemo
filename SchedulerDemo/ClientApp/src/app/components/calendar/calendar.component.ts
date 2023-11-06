@@ -38,7 +38,7 @@ export class CalendarComponent implements OnInit {
     // Adjust currentDay to the first day of the week that includes the first day of the month
     firstDay.setDate(1 - daysFromPreviousMonth);
   
-    const currentDay = new Date(firstDay);
+    let currentDay = new Date(firstDay);
   
     for (let week = 0; week < 6; week++) {
       calendarData[week] = [];
@@ -51,15 +51,15 @@ export class CalendarComponent implements OnInit {
       }
     }
   
-    for (const event of this.events) {
-      const eventDate = new Date(event.dateTime);
+    for (let event of this.events) {
+      let eventDate = new Date(event.dateTime);
       if (
         eventDate.getMonth() === date.getMonth() &&
         eventDate.getFullYear() === date.getFullYear()
       ) {
-        const dayOfMonth = eventDate.getDate();
-        const weekIndex = Math.floor((dayOfMonth - 1 + daysFromPreviousMonth) / 7);
-        const dayOfWeek = (eventDate.getDay() + 6) % 7; // Adjust dayOfWeek
+        let dayOfMonth = eventDate.getDate();
+        let weekIndex = Math.floor((dayOfMonth - 1 + daysFromPreviousMonth) / 7);
+        let dayOfWeek = (eventDate.getDay() + 6) % 7; // Adjust dayOfWeek
   
         calendarData[weekIndex][dayOfWeek].events.push({
           event: event,
@@ -75,7 +75,7 @@ export class CalendarComponent implements OnInit {
 
 
   initializeCalendar() {
-    const today = new Date(this.currentYear, this.getMonthNumber(this.selectedMonth), 1);
+    let today = new Date(this.currentYear, this.getMonthNumber(this.selectedMonth), 1);
     this.calendarData = this.buildCalendarData(today);
     this.selectedWeek = this.calendarData[0]; // Initialize with the data for the first week
   }
