@@ -14,10 +14,18 @@ namespace SchedulerDemo.Controllers
 
         [HttpGet]
 
-        public List<Userform> All()
+        public List<Userform> AllForAdmin()
         {
-            
+
             return dbContext.Userforms.OrderBy(p => p.DateTime).ToList();
+        }
+
+        [HttpGet ("[businessGoogleId]")]
+        public List<Userform> AllForBusiness(string businessGoogleId)
+        {
+
+            List<Userform> businessSchedule = dbContext.Userforms.OrderBy(p => p.DateTime).ToList();
+            return businessSchedule.Where(g => g.BusinessGoogleId == businessGoogleId).ToList();
         }
 
         [HttpGet("{city}")]
@@ -118,6 +126,21 @@ namespace SchedulerDemo.Controllers
             dbContext.SaveChanges();
             return c;
         }
+
+        [HttpGet]
+        public List<BusinessOwner> GetBusinessOwners()
+        {
+            return dbContext.BusinessOwners.OrderBy(p => p).ToList();
+        }
+
+        //[HttpGet("{city}")]
+        //public List<Userform> MyArea(string city)
+        //{
+        //    List<Userform> result = dbContext.Userforms.Where(f => f.City == city).ToList();
+        //    return result;
+
+        //}
+
 
 
         //public IActionResult Index()
