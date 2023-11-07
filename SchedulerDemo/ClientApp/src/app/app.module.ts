@@ -43,8 +43,9 @@ import { BusinessOwnerFormComponent } from './components/business-owner-form/bus
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'event-list', component: FormResultComponent },
-      { path: 'calendar-list', component: CalenderComponent},
-      { path: 'calendar', component: CalendarComponent}
+      { path: 'calendar-list', component: CalenderComponent },
+      { path: 'calendar', component: CalendarComponent },
+      { path: 'business-owner-form', component: BusinessOwnerFormComponent },
     ])
   ],
   providers: [

@@ -133,6 +133,23 @@ namespace SchedulerDemo.Controllers
             return dbContext.BusinessOwners.OrderBy(p => p).ToList();
         }
 
+        //[HttpPost("BusinessOwner")]
+        //public BusinessOwner businessOwner([FromBody] BusinessOwner businessOwner)
+        //{
+        //    if (dbContext.BusinessOwners.Any(b => b.BusinessGoogleId == businessOwner.BusinessGoogleId))
+        //    {
+        //        return businessOwner;
+        //    }
+        //    else
+        //    {
+        //        dbContext.BusinessOwners.Add(businessOwner);
+        //        dbContext.SaveChanges();
+        //    }
+        //    return businessOwner;
+        //}
+
+
+
         //[HttpGet("{city}")]
         //public List<Userform> MyArea(string city)
         //{

@@ -50,7 +50,7 @@ export class UserformService {
   }
 
   addBusinessOwner(b:BusinessOwner): Observable<BusinessOwner>{
-    return this.http.post<BusinessOwner>(`${this.baseUrl}Schedule/BusinessOwner`, b);
+    return this.http.post<BusinessOwner>(`${this.baseUrl}BusinessOwner`, b);
   }
   
 }

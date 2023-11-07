@@ -23,5 +23,4 @@ export interface BusinessOwner {
     sundayHoursOpen?: Date;
     sundayHoursClose?: Date;
     services?: string;
-
 }
