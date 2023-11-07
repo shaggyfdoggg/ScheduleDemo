@@ -55,7 +55,9 @@ export class BusinessOwnerFormComponent {
     newBusinessOwner.businessGoogleId = this.user.id;
     newBusinessOwner.businessName = this.user.name;
     console.log("Prior to service");
+    console.log(newBusinessOwner)
     this.eventService.addBusinessOwner(newBusinessOwner).subscribe((response:BusinessOwner) => {
+      console.log("middle")
       this.listOFBusinessOwners.push(response);
       console.log("after service call");
     });

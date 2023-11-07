@@ -20,14 +20,6 @@ namespace SchedulerDemo.Controllers
             return dbContext.Userforms.OrderBy(p => p.DateTime).ToList();
         }
 
-        [HttpGet ("{businessGoogleId}")]
-        public List<Userform> AllForBusiness(string businessGoogleId)
-        {
-
-            List<Userform> businessSchedule = dbContext.Userforms.OrderBy(p => p.DateTime).ToList();
-            return businessSchedule.Where(g => g.BusinessGoogleId == businessGoogleId).ToList();
-        }
-
         [HttpGet("{city}")]
         public List<Userform> MyArea(string city)
         {
@@ -127,42 +119,6 @@ namespace SchedulerDemo.Controllers
             return c;
         }
 
-        [HttpGet]
-        public List<BusinessOwner> GetBusinessOwners()
-        {
-            return dbContext.BusinessOwners.OrderBy(p => p).ToList();
-        }
-
-        //[HttpPost("BusinessOwner")]
-        //public BusinessOwner businessOwner([FromBody] BusinessOwner businessOwner)
-        //{
-        //    if (dbContext.BusinessOwners.Any(b => b.BusinessGoogleId == businessOwner.BusinessGoogleId))
-        //    {
-        //        return businessOwner;
-        //    }
-        //    else
-        //    {
-        //        dbContext.BusinessOwners.Add(businessOwner);
-        //        dbContext.SaveChanges();
-        //    }
-        //    return businessOwner;
-        //}
-
-
-
-        //[HttpGet("{city}")]
-        //public List<Userform> MyArea(string city)
-        //{
-        //    List<Userform> result = dbContext.Userforms.Where(f => f.City == city).ToList();
-        //    return result;
-
-        //}
-
-
-
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
+        
     }
 }

@@ -12,4 +12,6 @@ export interface Userform {
     public?: boolean;
     googleId?: string;
     endDateTime: Date;
+    businessGoogleId?: string;
+    //remove ? after new events created
 }

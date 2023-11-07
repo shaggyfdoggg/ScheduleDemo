@@ -4,6 +4,7 @@ import { UserformService } from 'src/app/services/userform.service';
 import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { UserInfo } from 'src/app/models/user-info';
 import { UserInfoService } from 'src/app/services/user-info.service';
+import { BusinessOwner } from 'src/app/models/business-owner';
 
 @Component({
   selector: 'app-form',
@@ -13,6 +14,7 @@ import { UserInfoService } from 'src/app/services/user-info.service';
 export class FormComponent {
   e: Userform = {} as Userform;
   eventList: Userform[] = [];
+  businessOwnerList: BusinessOwner[] = [];
   userInfoList: UserInfo[] = [];
   user: SocialUser = {} as SocialUser;
   loggedIn: boolean = false;
@@ -39,7 +41,7 @@ export class FormComponent {
   }
 
   ngOnInit() {
-    setTimeout(() => {
+    
       this.newInfo.state = "MI";
       this.newUser.state = "MI";
       this.authService.authState.subscribe((user) => {
@@ -47,10 +49,18 @@ export class FormComponent {
         this.loggedIn = user != null;
         this.GetEvents();
           this.doesThisPersonExist();
-        })});
-      
-    
+        });
+        this.populateOwnerList();
   };
+
+  populateOwnerList():void {
+    console.log("before populate")
+    this._formService.getAllBusiness().subscribe((response: BusinessOwner[]) => {
+      console.log("in populate")
+      this.businessOwnerList = response;
+      console.log(this.businessOwnerList)
+    });
+  }
 
   getCurrentDate(): string {
     let now = new Date();

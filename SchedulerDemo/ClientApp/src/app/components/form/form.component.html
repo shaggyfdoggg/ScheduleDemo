@@ -1,6 +1,10 @@
 <!-- <div *ngIf="(loggedIn) && (!doesIdExist)" class ="form"> -->
 
 	<!-- logged in and not in database form -->
+
+
+
+
 	<div class="form" *ngIf="(loggedIn == true) && (doesIdExist == false)">
 		
 		<h2>Enter your location</h2>
@@ -140,6 +144,13 @@
 
 <div class="form">
 <h2 style="color: rgb(0, 0, 0);">Add an Event</h2>
+<div>
+	<p>Services:</p>
+<select [(ngModel)]="e.businessGoogleId">
+	<option *ngFor="let b of businessOwnerList" [value]="b.businessGoogleId">{{b.services}}</option>
+	
+</select>
+</div>
 <div *ngIf="doesIdExist == false">
 	<p>First Name</p>
 <input type="text" placeholder="First Name" [(ngModel)]="e.firstName" />

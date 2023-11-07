@@ -130,7 +130,8 @@
   <select [(ngModel)]="newOwner.sundayHoursClose">
 	<option *ngFor="let time of timeIntervals" [value]="time" placeholder="12:00">{{ time }}</option>
   </select>
-
+<br>
+<p>Select a Service</p>
   <select [(ngModel)]="newOwner.services">
     <option>Barber</option>
     <option>LawnCare</option>
@@ -142,5 +143,5 @@
     <option>Tree Removal</option>
   </select>
 
-  <button [routerLink]="['']" (click)="addNewOwner(newOwner)">Submit</button>
+  <button  (click)="addNewOwner(newOwner)">Submit</button>
 </div>

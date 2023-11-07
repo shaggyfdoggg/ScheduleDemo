@@ -34,7 +34,8 @@ export class CalendarComponent implements OnInit {
       this.loggedIn = (user != null);
       this.setGoogleId();
     });
-
+this.newUser.googleId = this.user.id;
+console.log(this.newUser.googleId)
     this.eventService.getByBusinessName(this.user.id).subscribe(response => {
       this.events = response;
       const today = new Date();
