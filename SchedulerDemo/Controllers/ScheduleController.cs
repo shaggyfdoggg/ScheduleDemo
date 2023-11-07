@@ -20,7 +20,7 @@ namespace SchedulerDemo.Controllers
             return dbContext.Userforms.OrderBy(p => p.DateTime).ToList();
         }
 
-        [HttpGet ("[businessGoogleId]")]
+        [HttpGet ("{businessGoogleId}")]
         public List<Userform> AllForBusiness(string businessGoogleId)
         {
 

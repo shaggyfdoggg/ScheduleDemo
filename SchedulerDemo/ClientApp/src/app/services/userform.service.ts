@@ -45,10 +45,12 @@ export class UserformService {
     return this.http.patch<Userform>(`${this.baseUrl}Schedule`, e);
   }
 
-  getByBusinessName(businessGoogleId:string): Observable<BusinessOwner[]>{
-    return this.http.get<BusinessOwner[]>(`${this.baseUrl}Schedule/${businessGoogleId}`);
+  getByBusinessName(businessGoogleId:string): Observable<Userform[]>{
+    return this.http.get<Userform[]>(`${this.baseUrl}Schedule/${businessGoogleId}`);
   }
 
-
+  addBusinessOwner(b:BusinessOwner): Observable<BusinessOwner>{
+    return this.http.post<BusinessOwner>(`${this.baseUrl}Schedule/BusinessOwner`, b);
+  }
   
 }

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { UserformService } from 'src/app/services/userform.service';
 import { Userform } from 'src/app/models/userform';
+import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
+import { UserInfoService } from 'src/app/services/user-info.service';
+import { UserInfo } from 'src/app/models/user-info';
 
 @Component({
   selector: 'app-calendar',
@@ -13,11 +16,26 @@ export class CalendarComponent implements OnInit {
   currentYear: number = 0;
   selectedMonth: string = '';
   selectedWeek: { date: Date; events: { event: Userform; time: string }[] }[] = [];
+  user: SocialUser = {} as SocialUser;
+  loggedIn: boolean = false;
+  doesIdExist: boolean = false;
+  newUser: UserInfo = {} as UserInfo;
 
-  constructor(private eventService: UserformService) {}
+  constructor(
+    private eventService: UserformService,    
+    private authService: SocialAuthService,
+    private userinfoservice: UserInfoService
+    ) {}
 
   ngOnInit() {
-    this.eventService.getAll().subscribe(response => {
+
+    this.authService.authState.subscribe((user) => {
+      this.user = user;
+      this.loggedIn = (user != null);
+      this.setGoogleId();
+    });
+
+    this.eventService.getByBusinessName(this.user.id).subscribe(response => {
       this.events = response;
       const today = new Date();
       this.selectedMonth = this.getMonthName(today.getMonth());
@@ -26,6 +44,18 @@ export class CalendarComponent implements OnInit {
     });
   }
 
+setGoogleId(): void {
+    this.doesThisPersonExist();
+  }
+
+  doesThisPersonExist(): void {
+    this.userinfoservice.getById(this.user.id).subscribe((response: UserInfo) => {
+      this.doesIdExist = response != null;
+      if (this.doesIdExist) {
+        this.newUser = response;
+      }
+    });
+  }
 
   buildCalendarData(date: Date): { date: Date; events: { event: Userform, time: string }[] }[][] {
     const calendarData: { date: Date; events: { event: Userform, time: string }[] }[][] = [];
