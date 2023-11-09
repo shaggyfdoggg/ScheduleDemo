@@ -27,20 +27,45 @@ namespace SchedulerDemo.Controllers
             return businessSchedule;
         }
 
-        [HttpPost]
-        public BusinessOwner businessOwner([FromBody] BusinessOwner businessOwner)
+        [HttpGet("owner/{businessGoogleId}")]
+        public BusinessOwner businessOwner(string businessGoogleId)
         {
+            return dbContext.BusinessOwners.FirstOrDefault(b => b.BusinessGoogleId == businessGoogleId);
+        }
+
+        [HttpPost]
+        public BusinessOwner newOwner([FromBody] BusinessOwner owner)
+        {
+            BusinessOwner b = new BusinessOwner();
+            Console.WriteLine(owner.City);
+            Console.WriteLine(owner.FridayHoursOpen);
+            b.BusinessGoogleId = owner.BusinessGoogleId;
+            b.BusinessName = owner.BusinessName;
+            b.EmployeeName = owner.EmployeeName;
+            b.Address = owner.Address;
+            b.City = owner.City;
+            b.State = owner.State;
+            b.OneLocation = owner.OneLocation;
+            b.Services = owner.Services;
+            b.MondayHoursOpen = owner.MondayHoursOpen;
+            b.MondayHoursClose = owner.MondayHoursClose;
+            b.TuesdayHoursOpen = owner.TuesdayHoursOpen;
+            b.TuesdayHoursClose = owner.TuesdayHoursClose;
+            b.WednesdayHoursOpen = owner.WednesdayHoursOpen;
+            b.WednesdayHoursClose = owner.WednesdayHoursClose;
+            b.ThursdayHoursOpen = owner.ThursdayHoursOpen;
+            b.ThursdayHoursClose = owner.ThursdayHoursClose;
+            b.FridayHoursOpen = owner.FridayHoursOpen;
+            b.FridayHoursClose = owner.FridayHoursClose;
+            b.SatudayHoursOpen = owner.SatudayHoursOpen;
+            b.SundayHoursOpen = owner.SundayHoursOpen;
+            b.SaturdayHoursClose = owner.SaturdayHoursClose;
+            b.SundayHoursClose = owner.SundayHoursClose;
             
-            //if (dbContext.BusinessOwners.Any(b => b.BusinessGoogleId == businessOwner.BusinessGoogleId))
-            //{
-            //    return businessOwner;
-            //}
-            //else
-            //{
-                dbContext.BusinessOwners.Add(businessOwner);
+            dbContext.BusinessOwners.Add(b);
                 dbContext.SaveChanges();
-            //}
-            return businessOwner;
+            
+            return b;
         }
     }
 }

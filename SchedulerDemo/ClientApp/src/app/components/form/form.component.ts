@@ -15,10 +15,13 @@ export class FormComponent {
   e: Userform = {} as Userform;
   eventList: Userform[] = [];
   businessOwnerList: BusinessOwner[] = [];
+  currentOwner: BusinessOwner = {} as BusinessOwner;
   userInfoList: UserInfo[] = [];
   user: SocialUser = {} as SocialUser;
   loggedIn: boolean = false;
   newUser: UserInfo = {} as UserInfo;
+  hasLocation?: boolean = undefined;
+  pickedService:boolean = false;
   doesIdExist: boolean = false;
   newInfo: UserInfo ={} as UserInfo ;
   alreadyExists: boolean =false;
@@ -41,7 +44,7 @@ export class FormComponent {
   }
 
   ngOnInit() {
-    
+    this.e.businessGoogleId = '1';
       this.newInfo.state = "MI";
       this.newUser.state = "MI";
       this.authService.authState.subscribe((user) => {
@@ -142,10 +145,27 @@ export class FormComponent {
       this.newUser = response;
     });
   }
+  getBusinessOwner(businessId: string):void{
+    this._formService.getOneBusiness(businessId).subscribe((response: BusinessOwner) =>{
+      this.currentOwner = response;
+      this.hasLocation = this.currentOwner.oneLocation;
+      this.pickedService = true;
+    });
+  }
 
   newUserInfo(newUser: UserInfo): void {
     newUser.googleId = this.user.id;
-    if(newUser.address != '' && newUser.city != '' && newUser.state != ''){
+    if(this.currentOwner.oneLocation == true){
+      newUser.address = this.currentOwner.address;
+      newUser.city = this.currentOwner.city;
+      newUser.state = this.currentOwner.state;
+      this.userinfoservice.newUser(newUser).subscribe((response: UserInfo) => {
+        this.userInfoList.push(response);
+        this.doesIdExist = true;
+      });
+      this.userInfoList = [];
+    }
+    else if(newUser.address != '' && newUser.city != '' && newUser.state != ''){
     this.userinfoservice.newUser(newUser).subscribe((response: UserInfo) => {
       this.userInfoList.push(response);
       this.doesIdExist = true;
@@ -155,38 +175,38 @@ export class FormComponent {
   }
   }
 
-
-   isEventOverlapping(existingEvent: Userform, newEvent: Userform):boolean {
-     if((existingEvent.dateTime <= newEvent.dateTime && existingEvent.endDateTime >= newEvent.dateTime) || 
-      (existingEvent.dateTime <= newEvent.endDateTime && existingEvent.endDateTime >= newEvent.endDateTime ))  
-      {    
-        this.alreadyExists = true;
+  
+  isEventOverlapping(existingEvent: Userform, newEvent: Userform):boolean {
+    if((existingEvent.dateTime <= newEvent.dateTime && existingEvent.endDateTime >= newEvent.dateTime) || 
+    (existingEvent.dateTime <= newEvent.endDateTime && existingEvent.endDateTime >= newEvent.endDateTime ))  
+    {    
+      this.alreadyExists = true;
         console.log('Is event working is working')
-       return true;
+        return true;
       }
-
-    else{
-      return false;
+      
+      else{
+        return false;
+      }
+    };
+    
+    futureEventOnly(newEvent: Date): boolean{
+      if(newEvent < this.currentDate)
+      {
+        this.isInFuture = false;
+        return false;
+      }
+      else{
+        this.isInFuture = true;
+        return true;
+      }
     }
-  };
-
-futureEventOnly(newEvent: Date): boolean{
-  if(newEvent < this.currentDate)
-  {
-    this.isInFuture = false;
-    return false;
-  }
-  else{
-    this.isInFuture = true;
-    return true;
-  }
-}
-
-
-  addingEvent(newEvent: Userform): void {
+    
+    
+    addingEvent(newEvent: Userform): void {
     this.updateDateTime();
         console.log(newEvent)
-    let newNewDate: Date = new Date(newEvent.dateTime);
+        let newNewDate: Date = new Date(newEvent.dateTime);
     let timestamp = newNewDate.getTime() + 30 * 60000;
     newEvent.endDateTime = new Date(timestamp);
   console.log(newNewDate)

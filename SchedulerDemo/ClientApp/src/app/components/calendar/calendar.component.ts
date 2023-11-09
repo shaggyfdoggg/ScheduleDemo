@@ -11,11 +11,11 @@ import { UserInfo } from 'src/app/models/user-info';
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit {
-  calendarData: { date: Date; events: { event: Userform, time: string }[] }[][] = [];
+  calendarData: { date: Date; events: { event: Userform, time: string; endTime : string }[] }[][] = [];
   events: Userform[] = [];
   currentYear: number = 0;
   selectedMonth: string = '';
-  selectedWeek: { date: Date; events: { event: Userform; time: string }[] }[] = [];
+  selectedWeek: { date: Date; events: { event: Userform; time: string; endTime : string }[] }[] = [];
   user: SocialUser = {} as SocialUser;
   loggedIn: boolean = false;
   doesIdExist: boolean = false;
@@ -58,8 +58,8 @@ setGoogleId(): void {
     });
   }
 
-  buildCalendarData(date: Date): { date: Date; events: { event: Userform, time: string }[] }[][] {
-    const calendarData: { date: Date; events: { event: Userform, time: string }[] }[][] = [];
+  buildCalendarData(date: Date): { date: Date; events: { event: Userform, time: string; endTime : string }[] }[][] {
+    const calendarData: { date: Date; events: { event: Userform, time: string, endTime: string }[] }[][] = [];
   
     const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
   
@@ -83,6 +83,7 @@ setGoogleId(): void {
     }
   
     for (let event of this.events) {
+      let eventEndDate = new Date(event.endDateTime);
       let eventDate = new Date(event.dateTime);
       if (
         eventDate.getMonth() === date.getMonth() &&
@@ -94,7 +95,8 @@ setGoogleId(): void {
   
         calendarData[weekIndex][dayOfWeek].events.push({
           event: event,
-          time: eventDate.toLocaleTimeString()
+          time: eventDate.toLocaleTimeString(),
+          endTime: eventEndDate.toLocaleTimeString()
         });
       }
     }
@@ -111,7 +113,7 @@ setGoogleId(): void {
     this.selectedWeek = this.calendarData[0]; // Initialize with the data for the first week
   }
 
-  selectWeek(week: { date: Date; events: { event: Userform, time: string }[] }[]) {
+  selectWeek(week: { date: Date; events: { event: Userform, time: string; endTime : string }[] }[]) {
     this.selectedWeek = week;
   }
 

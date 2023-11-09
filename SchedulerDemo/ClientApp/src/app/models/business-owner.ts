@@ -2,8 +2,8 @@ import { Time } from "@angular/common";
 
 export interface BusinessOwner {
     id: number;
-    businessGoogleId: string;
-    businessName: string;
+    businessGoogleId?: string;
+    businessName?: string;
     employeeName?: string;
     address?: string;
     city?: string;
@@ -23,4 +23,5 @@ export interface BusinessOwner {
     sundayHoursOpen?: Date;
     sundayHoursClose?: Date;
     services?: string;
+    oneLocation?: boolean;
 }

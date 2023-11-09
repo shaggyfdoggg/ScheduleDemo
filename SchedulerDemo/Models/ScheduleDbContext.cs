@@ -25,7 +25,7 @@ public partial class ScheduleDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer(secret.optbuild);
+        => optionsBuilder.UseSqlServer("Data Source=schedulerdemo.database.windows.net; Initial Catalog=ScheduleDB; User Id=FOS; Password=C#July2023");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -43,6 +43,7 @@ public partial class ScheduleDbContext : DbContext
             entity.Property(e => e.BusinessName).HasMaxLength(255);
             entity.Property(e => e.City).HasMaxLength(255);
             entity.Property(e => e.EmployeeName).HasMaxLength(255);
+            entity.Property(e => e.OneLocation).HasColumnName("oneLocation");
             entity.Property(e => e.Services).HasMaxLength(255);
             entity.Property(e => e.State).HasMaxLength(255);
         });

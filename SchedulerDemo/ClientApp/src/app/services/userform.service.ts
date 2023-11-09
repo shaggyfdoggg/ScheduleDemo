@@ -46,6 +46,9 @@ export class UserformService {
   }
 
   // Business starts here ------------------------------------------------------------------------------------------------
+  getOneBusiness(businessGoogleId:string): Observable<BusinessOwner>{
+    return this.http.get<BusinessOwner>(`${this.baseUrl}BusinessOwner/owner/${businessGoogleId}`);
+  }
 
   getAllBusiness():Observable<BusinessOwner[]>{
     return this.http.get<BusinessOwner[]>(`${this.baseUrl}BusinessOwner`);

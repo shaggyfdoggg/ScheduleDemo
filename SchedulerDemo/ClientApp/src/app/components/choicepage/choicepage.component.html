@@ -1,0 +1,10 @@
+<div *ngIf="!doesIdExist == true" class="business">
+    <button [routerLink]="['/business-owner-form']">New Business Owner</button>
+    </div>
+    <div *ngIf="doesIdExist == true" class="business">
+        <!-- need to make separate component for patch for below -->
+        <button [routerLink]="['/business-owner-form']">Update Business Info</button>
+        </div>
+    <div class="customer">
+        <button [routerLink]="['/new-event']">Schedule an Appointment</button>
+    </div>

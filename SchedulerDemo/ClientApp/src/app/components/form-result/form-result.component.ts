@@ -89,6 +89,8 @@ export class FormResultComponent {
     });
   }
 
+  
+
   GetEvents(): void {
     this._formService.getAll().subscribe((response: Userform[]) => {
       this.list = response.sort((a, b) => {

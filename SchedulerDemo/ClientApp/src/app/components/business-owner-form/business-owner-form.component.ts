@@ -18,11 +18,13 @@ export class BusinessOwnerFormComponent {
     loggedIn: boolean = false;
     doesIdExist: boolean = false;
     newUser: UserInfo = {} as UserInfo;
-    listOFBusinessOwners: BusinessOwner[] = [];
+    listOfBusinessOwners: BusinessOwner[] = [];
     newOwner:BusinessOwner = {} as BusinessOwner;
     selectedTime: string = '';
     timeIntervals: string[] = this.generateTimeIntervals();
-  
+    fixedLocation: boolean = false;
+    displayForm: boolean = false;
+
     constructor(
       private eventService: UserformService,    
       private authService: SocialAuthService,
@@ -51,14 +53,27 @@ export class BusinessOwnerFormComponent {
   //     });
   //   }
   
+      setLocation(bool: boolean):void{
+        this.fixedLocation = bool;
+        this.displayForm = true;
+        console.log(this.fixedLocation);
+      }
+
   addNewOwner(newBusinessOwner: BusinessOwner): void{
+    newBusinessOwner.oneLocation = this.fixedLocation;
+    if(this.fixedLocation == false){
+      newBusinessOwner.address = '';
+      newBusinessOwner.city = '';
+      newBusinessOwner.state = '';
+    }
+    console.log(newBusinessOwner.oneLocation)
     newBusinessOwner.businessGoogleId = this.user.id;
     newBusinessOwner.businessName = this.user.name;
+    newBusinessOwner.employeeName = "";
     console.log("Prior to service");
     console.log(newBusinessOwner)
     this.eventService.addBusinessOwner(newBusinessOwner).subscribe((response:BusinessOwner) => {
-      console.log("middle")
-      this.listOFBusinessOwners.push(response);
+      this.listOfBusinessOwners.push(response);
       console.log("after service call");
     });
   }

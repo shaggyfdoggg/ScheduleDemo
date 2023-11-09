@@ -17,6 +17,7 @@ import { AboutComponent } from './components/about/about.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { DayComponent } from './components/day/day.component';
 import { BusinessOwnerFormComponent } from './components/business-owner-form/business-owner-form.component';
+import { ChoicepageComponent } from './components/choicepage/choicepage.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { BusinessOwnerFormComponent } from './components/business-owner-form/bus
     AboutComponent,
     CalendarComponent,
     DayComponent,
-    BusinessOwnerFormComponent
+    BusinessOwnerFormComponent,
+    ChoicepageComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -46,6 +48,7 @@ import { BusinessOwnerFormComponent } from './components/business-owner-form/bus
       { path: 'calendar-list', component: CalenderComponent },
       { path: 'calendar', component: CalendarComponent },
       { path: 'business-owner-form', component: BusinessOwnerFormComponent },
+      { path: 'new-event', component: FormComponent}
     ])
   ],
   providers: [

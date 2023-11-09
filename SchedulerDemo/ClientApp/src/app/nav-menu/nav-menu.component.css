@@ -1,4 +1,4 @@
-a.navbar-brand {
+/* a.navbar-brand {
   white-space: normal;
   text-align: center;
   word-break: break-all;
@@ -15,4 +15,86 @@ html {
 
 .box-shadow {
   box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+} */
+
+
+
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background: linear-gradient(to right, #3498db, #2c3e50);
+}
+
+
+.navbar {
+  border: none;
+  padding: 15px 0; 
+  transition: background-color 0.3s ease-in-out;
+}
+.navbar.scrolled{
+  transition: background-color rgb#3498db;
+}
+
+.navbar-brand {
+  font-family: 'Pacifico', cursive; 
+  font-size: 24px;
+  color: #ecf0f1;
+}
+
+
+.navbar-toggler-icon {
+  background-color: #ecf0f1;
+  font-size: 1.5rem;
+}
+
+
+.navbar {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+
+.nav-link {
+  color: #ecf0f1;
+  font-size: 18px;
+  transition: color 0.3s;
+}
+
+.nav-link:hover {
+  color: #e74c3c; 
+}
+
+
+.asl-google-signin-button {
+  margin-right: 10px;
+}
+
+
+.btn-outline-dark {
+  background-color: #ecf0f1;
+  border-color: #ecf0f1;
+  color: #2c3e50;
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+}
+
+.btn-outline-dark:hover {
+  background-color: #3498db;
+  border-color: #3498db;
+  color: #ecf0f1;
+}
+
+
+.nav-link::before {
+  content: '';
+  display: block;
+  height: 2px;
+  width: 0;
+  background: #ecf0f1;
+  transition: width 0.3s;
+}
+
+.nav-link:hover::before {
+  width: 100%;
 }

@@ -1,0 +1,29 @@
+.business,
+.customer {
+  text-align: center;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.3s ease-in-out;
+  display: inline-block; /* Add this line to make buttons inline-block */
+  margin: 10px; /* Add this line to add some space around the buttons */
+}
+
+.customer button {
+  background-color: #3498db;
+}
+
+.business button:hover {
+  background-color: #45a049;
+}
+
+.customer button:hover {
+  background-color: #2980b9;
+}

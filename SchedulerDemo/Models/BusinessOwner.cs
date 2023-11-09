@@ -48,4 +48,6 @@ public partial class BusinessOwner
     public TimeSpan? SundayHoursClose { get; set; }
 
     public string? Services { get; set; }
+
+    public bool? OneLocation { get; set; }
 }

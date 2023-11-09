@@ -7,7 +7,7 @@ import { Userform } from 'src/app/models/userform';
   styleUrls: ['./day.component.css']
 })
 export class DayComponent {
-  @Input() day: { date: Date; events: { event: Userform, time: string }[] };
+  @Input() day: { date: Date; events: { event: Userform, time: string, endTime: string }[] };
 
   constructor() {
     this.day = { date: new Date(), events: [] }; // Initialize with default values if needed
