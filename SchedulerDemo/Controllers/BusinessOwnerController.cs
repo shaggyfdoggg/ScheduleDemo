@@ -62,9 +62,18 @@ namespace SchedulerDemo.Controllers
             //b.SaturdayHoursClose = owner.SaturdayHoursClose;
             //b.SundayHoursClose = owner.SundayHoursClose;
 
-            dbContext.BusinessOwners.Add(owner);
+            try
+            {
+                // Database operations
                 dbContext.SaveChanges();
-            
+            }
+            catch (Exception ex)
+            {
+                // Log or handle the exception
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+
+
             return owner;
         }
     }

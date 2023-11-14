@@ -87,10 +87,10 @@ export class BusinessOwnerFormComponent {
     newBusinessOwner.employeeName = "";
    
     console.log("Prior to service");
-    console.log(newBusinessOwner)
+    console.log(newBusinessOwner);
     this.eventService.addBusinessOwner(newBusinessOwner).subscribe((response:BusinessOwner) => {
-      console.log(response)
-      this.newOwner =response;
+      console.log(response);
+      newBusinessOwner = response;
        this.listOfBusinessOwners.push(this.newOwner);
       console.log("after service call");
     });
