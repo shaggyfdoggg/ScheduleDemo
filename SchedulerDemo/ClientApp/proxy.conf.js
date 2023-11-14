@@ -11,7 +11,7 @@ const PROXY_CONFIG = [
       "/UserInfo",
       "/BusinessOwner"
    ],
-    proxyTimeout: 10000,
+    proxyTimeout: 60000,
     target: target,
     secure: false,
     headers: {

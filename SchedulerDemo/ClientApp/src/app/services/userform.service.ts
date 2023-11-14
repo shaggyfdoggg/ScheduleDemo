@@ -58,8 +58,8 @@ export class UserformService {
     return this.http.get<Userform[]>(`${this.baseUrl}BusinessOwner/${businessGoogleId}`);
   }
 
-  addBusinessOwner(b:BusinessOwner): Observable<BusinessOwner>{
-    return this.http.post<BusinessOwner>(`${this.baseUrl}BusinessOwner`, b);
+  addBusinessOwner(owner:BusinessOwner): Observable<BusinessOwner>{
+    return this.http.post<BusinessOwner>(`${this.baseUrl}BusinessOwner`, owner);
   }
   
 }

@@ -31,7 +31,7 @@ public partial class ScheduleDbContext : DbContext
     {
         modelBuilder.Entity<BusinessOwner>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Business__3214EC278BF58D72");
+            entity.HasKey(e => e.Id).HasName("PK__Business__3214EC271B896831");
 
             entity.ToTable("BusinessOwner");
 
@@ -43,9 +43,23 @@ public partial class ScheduleDbContext : DbContext
             entity.Property(e => e.BusinessName).HasMaxLength(255);
             entity.Property(e => e.City).HasMaxLength(255);
             entity.Property(e => e.EmployeeName).HasMaxLength(255);
+            entity.Property(e => e.FridayHoursClose).HasMaxLength(255);
+            entity.Property(e => e.FridayHoursOpen).HasMaxLength(255);
+            entity.Property(e => e.MondayHoursClose).HasMaxLength(255);
+            entity.Property(e => e.MondayHoursOpen).HasMaxLength(255);
             entity.Property(e => e.OneLocation).HasColumnName("oneLocation");
+            entity.Property(e => e.SatudayHoursOpen).HasMaxLength(255);
+            entity.Property(e => e.SaturdayHoursClose).HasMaxLength(255);
             entity.Property(e => e.Services).HasMaxLength(255);
             entity.Property(e => e.State).HasMaxLength(255);
+            entity.Property(e => e.SundayHoursClose).HasMaxLength(255);
+            entity.Property(e => e.SundayHoursOpen).HasMaxLength(255);
+            entity.Property(e => e.ThursdayHoursClose).HasMaxLength(255);
+            entity.Property(e => e.ThursdayHoursOpen).HasMaxLength(255);
+            entity.Property(e => e.TuesdayHoursClose).HasMaxLength(255);
+            entity.Property(e => e.TuesdayHoursOpen).HasMaxLength(255);
+            entity.Property(e => e.WednesdayHoursClose).HasMaxLength(255);
+            entity.Property(e => e.WednesdayHoursOpen).HasMaxLength(255);
         });
 
         modelBuilder.Entity<Calendar>(entity =>

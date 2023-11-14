@@ -24,6 +24,21 @@ export class BusinessOwnerFormComponent {
     timeIntervals: string[] = this.generateTimeIntervals();
     fixedLocation: boolean = false;
     displayForm: boolean = false;
+    MO:string = '';
+    MC:string = '';
+    TuesO:string = '';
+    TuesC:string = '';
+    WO:string = '';
+    WC:string = '';
+    ThursO:string = '';
+    ThursC:string = '';
+    FO:string = '';
+    FC:string = '';
+    SatO:string = '';
+    SatC:string = '';
+    SunO:string = '';
+    SunC:string = '';
+
 
     constructor(
       private eventService: UserformService,    
@@ -70,10 +85,13 @@ export class BusinessOwnerFormComponent {
     newBusinessOwner.businessGoogleId = this.user.id;
     newBusinessOwner.businessName = this.user.name;
     newBusinessOwner.employeeName = "";
+   
     console.log("Prior to service");
     console.log(newBusinessOwner)
     this.eventService.addBusinessOwner(newBusinessOwner).subscribe((response:BusinessOwner) => {
-      this.listOfBusinessOwners.push(response);
+      console.log(response)
+      this.newOwner =response;
+       this.listOfBusinessOwners.push(this.newOwner);
       console.log("after service call");
     });
   }

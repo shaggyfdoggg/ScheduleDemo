@@ -19,33 +19,33 @@ public partial class BusinessOwner
 
     public string? State { get; set; }
 
-    public TimeSpan? MondayHoursOpen { get; set; }
+    public string? MondayHoursOpen { get; set; }
 
-    public TimeSpan? MondayHoursClose { get; set; }
+    public string? MondayHoursClose { get; set; }
 
-    public TimeSpan? TuesdayHoursOpen { get; set; }
+    public string? TuesdayHoursOpen { get; set; }
 
-    public TimeSpan? TuesdayHoursClose { get; set; }
+    public string? TuesdayHoursClose { get; set; }
 
-    public TimeSpan? WednesdayHoursOpen { get; set; }
+    public string? WednesdayHoursOpen { get; set; }
 
-    public TimeSpan? WednesdayHoursClose { get; set; }
+    public string? WednesdayHoursClose { get; set; }
 
-    public TimeSpan? ThursdayHoursOpen { get; set; }
+    public string? ThursdayHoursOpen { get; set; }
 
-    public TimeSpan? ThursdayHoursClose { get; set; }
+    public string? ThursdayHoursClose { get; set; }
 
-    public TimeSpan? FridayHoursOpen { get; set; }
+    public string? FridayHoursOpen { get; set; }
 
-    public TimeSpan? FridayHoursClose { get; set; }
+    public string? FridayHoursClose { get; set; }
 
-    public TimeSpan? SatudayHoursOpen { get; set; }
+    public string? SatudayHoursOpen { get; set; }
 
-    public TimeSpan? SaturdayHoursClose { get; set; }
+    public string? SaturdayHoursClose { get; set; }
 
-    public TimeSpan? SundayHoursOpen { get; set; }
+    public string? SundayHoursOpen { get; set; }
 
-    public TimeSpan? SundayHoursClose { get; set; }
+    public string? SundayHoursClose { get; set; }
 
     public string? Services { get; set; }
 
