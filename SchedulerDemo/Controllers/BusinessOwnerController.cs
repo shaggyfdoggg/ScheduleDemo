@@ -34,7 +34,7 @@ namespace SchedulerDemo.Controllers
         }
 
         [HttpPost]
-        public BusinessOwner newOwner([FromBody] BusinessOwner owner)
+        public BusinessOwner NewOwner([FromBody] BusinessOwner owner)
         {
             //BusinessOwner b = new BusinessOwner();
             //Console.WriteLine(owner.City);
