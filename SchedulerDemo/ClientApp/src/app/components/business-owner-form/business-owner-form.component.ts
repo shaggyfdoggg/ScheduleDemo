@@ -89,12 +89,12 @@ export class BusinessOwnerFormComponent {
     newBusinessOwner.employeeName = "";
    
     console.log("Prior to service");
-    console.log(newBusinessOwner)
-    this.submittedUser = newBusinessOwner;
-    console.log("Submitted User = ", this.submittedUser)
-    this.eventService.addBusinessOwner(this.submittedUser).subscribe((response:BusinessOwner) => {
-      console.log(response)
-      this.newOwner =response;
+
+    console.log(newBusinessOwner);
+    this.eventService.addBusinessOwner(newBusinessOwner).subscribe((response:BusinessOwner) => {
+      console.log(response);
+      newBusinessOwner = response;
+
        this.listOfBusinessOwners.push(this.newOwner);
       console.log("after service call");
     });
