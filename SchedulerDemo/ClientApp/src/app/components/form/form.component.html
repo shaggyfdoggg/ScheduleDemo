@@ -2,8 +2,8 @@
 <div *ngIf="!pickedService">
   <p>Services:</p>
   <select [(ngModel)]="e.businessGoogleId">
-    <option *ngFor="let b of businessOwnerList" [value]="b.businessGoogleID" placeholder="fail">
-      {{ b.services }}
+    <option *ngFor="let b of businessOwnerList" [value]="b.BusinessGoogleID" placeholder="fail">
+      {{ b.Services }}
     </option>
   </select>
   

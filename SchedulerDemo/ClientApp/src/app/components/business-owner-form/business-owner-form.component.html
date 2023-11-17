@@ -12,20 +12,21 @@
 
     <div *ngIf="loggedIn && displayForm == false">
       <p>Does your business have a fixed location?</p>
-      <select [(ngModel)]="fixedLocation">
-        <option value=true>Yes</option>
-        <option value=false>No</option>
+      <select [(ngModel)]="truefalseString">
+        <option value="true">Yes</option>
+        <option value="false">No</option>
       </select>
-      <button (click)="setLocation(fixedLocation)">Submit</button>
+      <button (click)="setLocation(truefalseString)">Submit</button>
     </div>
     <div *ngIf="loggedIn">
       <div *ngIf="fixedLocation && displayForm">
+        
         <p>Address</p>
-        <input type="text" placeholder="Address" [(ngModel)]="newOwner.address" />
+        <input type="text" placeholder="Address" [(ngModel)]="newOwner.Address" />
         <p>City</p>
-        <input type="text" placeholder="City" [(ngModel)]="newOwner.city" />
+        <input type="text" placeholder="City" [(ngModel)]="newOwner.City" />
         <p>State</p>
-        <select [(ngModel)]="newOwner.state">
+        <select [(ngModel)]="newOwner.State">
           <option value="AL">Alabama</option>
           <option value="AK">Alaska</option>
           <option value="AZ">Arizona</option>
@@ -86,12 +87,12 @@
         <p>Monday:</p>
         <div class="timeOptions">
           <p>Time Open:</p>
-          <select [(ngModel)]="newOwner.mondayHoursOpen">
-            <option *ngFor="let time of timeIntervals" [value]="time" placeholder="12:00">{{ time }}</option>
+          <select [(ngModel)]="newOwner.MondayHoursOpen">
+            <option *ngFor="let time of timeIntervals" [value]="time" >{{ time }}</option>
           </select>
           <p>Time Closed:</p>
-          <select [(ngModel)]="newOwner.mondayHoursClose">
-            <option *ngFor="let time of timeIntervals" [value]="time" placeholder="12:00">{{ time }}</option>
+          <select [(ngModel)]="newOwner.MondayHoursClose">
+            <option *ngFor="let time of timeIntervals" [value]="time" >{{ time }}</option>
           </select>
         </div>
       </div>
@@ -100,12 +101,12 @@
         <p>Tuesday:</p>
         <div class="timeOptions">
           <p>Time Open:</p>
-          <select [(ngModel)]="newOwner.tuesdayHoursOpen">
-            <option *ngFor="let time of timeIntervals" [value]="time" placeholder="12:00">{{ time }}</option>
+          <select [(ngModel)]="newOwner.TuesdayHoursOpen">
+            <option *ngFor="let time of timeIntervals" [value]="time" >{{ time }}</option>
           </select>
           <p>Time Closed:</p>
-          <select [(ngModel)]="newOwner.tuesdayHoursClose">
-            <option *ngFor="let time of timeIntervals" [value]="time" placeholder="12:00">{{ time }}</option>
+          <select [(ngModel)]="newOwner.TuesdayHoursClose">
+            <option *ngFor="let time of timeIntervals" [value]="time">{{ time }}</option>
           </select>
         </div>
       </div>
@@ -114,12 +115,12 @@
         <p>Wednesday:</p>
         <div class="timeOptions">
           <p>Time Open:</p>
-          <select [(ngModel)]="newOwner.wednesdayHoursOpen">
-            <option *ngFor="let time of timeIntervals" [value]="time" placeholder="12:00">{{ time }}</option>
+          <select [(ngModel)]="newOwner.WednesdayHoursOpen">
+            <option *ngFor="let time of timeIntervals" [value]="time">{{ time }}</option>
           </select>
           <p>Time Closed:</p>
-          <select [(ngModel)]="newOwner.wednesdayHoursClose">
-            <option *ngFor="let time of timeIntervals" [value]="time" placeholder="12:00">{{ time }}</option>
+          <select [(ngModel)]="newOwner.WednesdayHoursClose">
+            <option *ngFor="let time of timeIntervals" [value]="time" >{{ time }}</option>
           </select>
         </div>
       </div>
@@ -128,12 +129,12 @@
         <p>Thursday:</p>
         <div class="timeOptions">
           <p>Time Open:</p>
-          <select [(ngModel)]="newOwner.thursdayHoursOpen">
-            <option *ngFor="let time of timeIntervals" [value]="time" placeholder="12:00">{{ time }}</option>
+          <select [(ngModel)]="newOwner.ThursdayHoursOpen">
+            <option *ngFor="let time of timeIntervals" [value]="time">{{ time }}</option>
           </select>
           <p>Time Closed:</p>
-          <select [(ngModel)]="newOwner.thursdayHoursClose">
-            <option *ngFor="let time of timeIntervals" [value]="time" placeholder="12:00">{{ time }}</option>
+          <select [(ngModel)]="newOwner.ThursdayHoursClose">
+            <option *ngFor="let time of timeIntervals" [value]="time">{{ time }}</option>
           </select>
         </div>
       </div>
@@ -142,12 +143,12 @@
         <p>Friday:</p>
         <div class="timeOptions">
           <p>Time Open:</p>
-          <select [(ngModel)]="newOwner.fridayHoursOpen">
-            <option *ngFor="let time of timeIntervals" [value]="time" placeholder="12:00">{{ time }}</option>
+          <select [(ngModel)]="newOwner.FridayHoursOpen">
+            <option *ngFor="let time of timeIntervals" [value]="time">{{ time }}</option>
           </select>
           <p>Time Closed:</p>
-          <select [(ngModel)]="newOwner.fridayHoursClose">
-            <option *ngFor="let time of timeIntervals" [value]="time" placeholder="12:00">{{ time }}</option>
+          <select [(ngModel)]="newOwner.FridayHoursClose">
+            <option *ngFor="let time of timeIntervals" [value]="time">{{ time }}</option>
           </select>
         </div>
       </div>
@@ -156,12 +157,12 @@
         <p>Saturday:</p>
         <div class="timeOptions">
           <p>Time Open:</p>
-          <select [(ngModel)]="newOwner.saturdayHoursOpen">
-            <option *ngFor="let time of timeIntervals" [value]="time" placeholder="12:00">{{ time }}</option>
+          <select [(ngModel)]="newOwner.SaturdayHoursOpen">
+            <option *ngFor="let time of timeIntervals" [value]="time">{{ time }}</option>
           </select>
           <p>Time Closed:</p>
-          <select [(ngModel)]="newOwner.saturdayHoursClose">
-            <option *ngFor="let time of timeIntervals" [value]="time" placeholder="12:00">{{ time }}</option>
+          <select [(ngModel)]="newOwner.SaturdayHoursClose">
+            <option *ngFor="let time of timeIntervals" [value]="time">{{ time }}</option>
           </select>
         </div>
       </div>
@@ -170,19 +171,19 @@
         <p>Sunday:</p>
         <div class="timeOptions">
           <p>Time Open:</p>
-          <select [(ngModel)]="newOwner.sundayHoursOpen">
-            <option *ngFor="let time of timeIntervals" [value]="time" placeholder="12:00">{{ time }}</option>
+          <select [(ngModel)]="newOwner.SundayHoursOpen">
+            <option *ngFor="let time of timeIntervals" [value]="time">{{ time }}</option>
           </select>
           <p>Time Closed:</p>
-          <select [(ngModel)]="newOwner.sundayHoursClose">
-            <option *ngFor="let time of timeIntervals" [value]="time" placeholder="12:00">{{ time }}</option>
+          <select [(ngModel)]="newOwner.SundayHoursClose">
+            <option *ngFor="let time of timeIntervals" [value]="time">{{ time }}</option>
           </select>
         </div>
       </div>
       <br>
 
       <p>Select a Service</p>
-      <select [(ngModel)]="newOwner.services">
+      <select [(ngModel)]="newOwner.Services">
         <option>Barber</option>
         <option>LawnCare</option>
         <option>Handyman</option>

@@ -23,9 +23,10 @@ export class BusinessOwnerFormComponent {
     submittedUser:BusinessOwner = {} as BusinessOwner;
     selectedTime: string = '';
     timeIntervals: string[] = this.generateTimeIntervals();
-    fixedLocation: boolean = false;
+    fixedLocation:boolean = false;
+    truefalseString: string = '';
     displayForm: boolean = false;
-    MO:string = '';
+    MO:boolean = false;
     MC:string = '';
     TuesO:string = '';
     TuesC:string = '';
@@ -70,8 +71,13 @@ export class BusinessOwnerFormComponent {
   //     });
   //   }
   
-      setLocation(bool: boolean):void{
-        this.fixedLocation = bool;
+      setLocation(bool: string):void{
+        if(bool === "true"){
+          this.fixedLocation = true;         
+        }
+        if(bool === "false"){
+          this.fixedLocation = false;
+        }
         this.displayForm = true;
         console.log(this.fixedLocation);
       }
@@ -79,14 +85,14 @@ export class BusinessOwnerFormComponent {
   addNewOwner(newBusinessOwner: BusinessOwner): void{
     newBusinessOwner.oneLocation = this.fixedLocation;
     if(this.fixedLocation == false){
-      newBusinessOwner.address = '';
-      newBusinessOwner.city = '';
-      newBusinessOwner.state = '';
+      newBusinessOwner.Address = '';
+      newBusinessOwner.City = '';
+      newBusinessOwner.State = '';
     }
     console.log(newBusinessOwner.oneLocation)
-    newBusinessOwner.businessGoogleID = this.user.id;
-    newBusinessOwner.businessName = this.user.name;
-    newBusinessOwner.employeeName = "";
+    newBusinessOwner.BusinessGoogleID = this.user.id;
+    newBusinessOwner.BusinessName = this.user.name;
+    newBusinessOwner.EmployeeName = "";
    
     console.log("Prior to service");
 

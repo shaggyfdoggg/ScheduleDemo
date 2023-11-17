@@ -156,9 +156,9 @@ export class FormComponent {
   newUserInfo(newUser: UserInfo): void {
     newUser.googleId = this.user.id;
     if(this.currentOwner.oneLocation == true){
-      newUser.address = this.currentOwner.address;
-      newUser.city = this.currentOwner.city;
-      newUser.state = this.currentOwner.state;
+      newUser.address = this.currentOwner.Address;
+      newUser.city = this.currentOwner.City;
+      newUser.state = this.currentOwner.State;
       this.userinfoservice.newUser(newUser).subscribe((response: UserInfo) => {
         this.userInfoList.push(response);
         this.doesIdExist = true;
