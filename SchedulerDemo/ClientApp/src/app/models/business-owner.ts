@@ -2,7 +2,7 @@ import { Time } from "@angular/common";
 
 export interface BusinessOwner {
     id: number;
-    businessGoogleId?: string;
+    businessGoogleID?: string;
     businessName?: string;
     employeeName?: string;
     address?: string;

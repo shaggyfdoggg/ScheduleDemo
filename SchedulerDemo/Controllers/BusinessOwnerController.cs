@@ -28,7 +28,7 @@ namespace SchedulerDemo.Controllers
         }
 
         [HttpGet("owner/{businessGoogleId}")]
-        public BusinessOwner businessOwner(string businessGoogleId)
+        public BusinessOwner oneOwner(string businessGoogleId)
         {
             return dbContext.BusinessOwners.FirstOrDefault(b => b.BusinessGoogleId == businessGoogleId);
         }
@@ -63,7 +63,7 @@ namespace SchedulerDemo.Controllers
             //b.SundayHoursClose = owner.SundayHoursClose;
 
             dbContext.BusinessOwners.Add(owner);
-                dbContext.SaveChanges();
+            dbContext.SaveChanges();
             
             return owner;
         }

@@ -20,6 +20,7 @@ export class BusinessOwnerFormComponent {
     newUser: UserInfo = {} as UserInfo;
     listOfBusinessOwners: BusinessOwner[] = [];
     newOwner:BusinessOwner = {} as BusinessOwner;
+    submittedUser:BusinessOwner = {} as BusinessOwner;
     selectedTime: string = '';
     timeIntervals: string[] = this.generateTimeIntervals();
     fixedLocation: boolean = false;
@@ -53,6 +54,7 @@ export class BusinessOwnerFormComponent {
         this.loggedIn = (user != null);
         // this.setGoogleId();
       });
+       this.GetBusinesses();
       }
   
   // setGoogleId(): void {
@@ -82,19 +84,29 @@ export class BusinessOwnerFormComponent {
       newBusinessOwner.state = '';
     }
     console.log(newBusinessOwner.oneLocation)
-    newBusinessOwner.businessGoogleId = this.user.id;
+    newBusinessOwner.businessGoogleID = this.user.id;
     newBusinessOwner.businessName = this.user.name;
     newBusinessOwner.employeeName = "";
    
     console.log("Prior to service");
     console.log(newBusinessOwner)
-    this.eventService.addBusinessOwner(newBusinessOwner).subscribe((response:BusinessOwner) => {
+    this.submittedUser = newBusinessOwner;
+    console.log("Submitted User = ", this.submittedUser)
+    this.eventService.addBusinessOwner(this.submittedUser).subscribe((response:BusinessOwner) => {
       console.log(response)
       this.newOwner =response;
        this.listOfBusinessOwners.push(this.newOwner);
       console.log("after service call");
     });
   }
+
+GetBusinesses():void{
+  this.eventService.getAllBusiness().subscribe((response:BusinessOwner[]) => {
+    console.log(response);
+    this.listOfBusinessOwners = response
+  });
+}
+
 
   generateTimeIntervals(): string[] {
     let intervals = [];
