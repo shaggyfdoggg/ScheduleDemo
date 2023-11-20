@@ -194,7 +194,7 @@
         <option>Tree Removal</option>
       </select>
 
-      <button (click)="addNewOwner(newOwner)">Submit</button>
+      <button [routerLink]="['/confirmation']" (click)="addNewOwner(newOwner)" >Submit</button>
     </div>
     </div>
   </div>
