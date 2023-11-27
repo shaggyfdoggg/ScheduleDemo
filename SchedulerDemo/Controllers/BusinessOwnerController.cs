@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SchedulerDemo.Models;
+using System.Security.Cryptography.Xml;
 
 namespace SchedulerDemo.Controllers
 {
@@ -36,9 +37,26 @@ namespace SchedulerDemo.Controllers
         [HttpPost]
         public BusinessOwner NewOwner([FromBody] BusinessOwner owner)
         {
-            //BusinessOwner b = new BusinessOwner();
-            //Console.WriteLine(owner.City);
-            //Console.WriteLine(owner.FridayHoursOpen);
+            try
+            {
+               
+                dbContext.BusinessOwners.Add(owner);
+                dbContext.SaveChanges();
+                
+            }
+            catch (Exception ex)
+            {
+                
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+            return owner;
+        }
+        [HttpPatch]
+        public BusinessOwner UpdateOwner([FromBody]BusinessOwner owner)
+        {
+
+            BusinessOwner b = dbContext.BusinessOwners.FirstOrDefault(p => p.BusinessGoogleId == owner.BusinessGoogleId);
+
             //b.BusinessGoogleId = owner.BusinessGoogleId;
             //b.BusinessName = owner.BusinessName;
             //b.EmployeeName = owner.EmployeeName;
@@ -62,25 +80,118 @@ namespace SchedulerDemo.Controllers
             //b.SaturdayHoursClose = owner.SaturdayHoursClose;
             //b.SundayHoursClose = owner.SundayHoursClose;
 
-
-            
-
-            try
+            if (owner.BusinessGoogleId != null)
             {
-               
-            dbContext.BusinessOwners.Add(owner);
+                b.BusinessGoogleId = owner.BusinessGoogleId;
+            }
+
+            if (owner.BusinessName != null)
+            {
+                b.BusinessName = owner.BusinessName;
+            }
+
+            if (owner.EmployeeName != null)
+            {
+                b.EmployeeName = owner.EmployeeName;
+            }
+
+            if (owner.Address != null)
+            {
+                b.Address = owner.Address;
+            }
+
+            if (owner.City != null)
+            {
+                b.City = owner.City;
+            }
+
+            if (owner.State != null)
+            {
+                b.State = owner.State;
+            }
+
+            if (owner.OneLocation != null)
+            {
+                b.OneLocation = owner.OneLocation;
+            }
+
+            if (owner.Services != null)
+            {
+                b.Services = owner.Services;
+            }
+
+            if (owner.MondayHoursOpen != null)
+            {
+                b.MondayHoursOpen = owner.MondayHoursOpen;
+            }
+
+            if (owner.MondayHoursClose != null)
+            {
+                b.MondayHoursClose = owner.MondayHoursClose;
+            }
+
+            if (owner.TuesdayHoursOpen != null)
+            {
+                b.TuesdayHoursOpen = owner.TuesdayHoursOpen;
+            }
+
+            if (owner.TuesdayHoursClose != null)
+            {
+                b.TuesdayHoursClose = owner.TuesdayHoursClose;
+            }
+
+            if (owner.WednesdayHoursOpen != null)
+            {
+                b.WednesdayHoursOpen = owner.WednesdayHoursOpen;
+            }
+
+            if (owner.WednesdayHoursClose != null)
+            {
+                b.WednesdayHoursClose = owner.WednesdayHoursClose;
+            }
+
+            if (owner.ThursdayHoursOpen != null)
+            {
+                b.ThursdayHoursOpen = owner.ThursdayHoursOpen;
+            }
+
+            if (owner.ThursdayHoursClose != null)
+            {
+                b.ThursdayHoursClose = owner.ThursdayHoursClose;
+            }
+
+            if (owner.FridayHoursOpen != null)
+            {
+                b.FridayHoursOpen = owner.FridayHoursOpen;
+            }
+
+            if (owner.FridayHoursClose != null)
+            {
+                b.FridayHoursClose = owner.FridayHoursClose;
+            }
+
+            if (owner.SatudayHoursOpen != null)
+            {
+                b.SatudayHoursOpen = owner.SatudayHoursOpen;
+            }
+
+            if (owner.SaturdayHoursClose != null)
+            {
+                b.SaturdayHoursClose = owner.SaturdayHoursClose;
+            }
+
+            if (owner.SundayHoursOpen != null)
+            {
+                b.SundayHoursOpen = owner.SundayHoursOpen;
+            }
+
+            if (owner.SundayHoursClose != null)
+            {
+                b.SundayHoursClose = owner.SundayHoursClose;
+            }
+            dbContext.BusinessOwners.Update(b);
             dbContext.SaveChanges();
-                
-            }
-            catch (Exception ex)
-            {
-                
-                Console.WriteLine($"An error occurred: {ex.Message}");
-            }
-
-
-
-            return owner;
+            return b;
         }
     }
 }

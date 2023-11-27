@@ -1,0 +1,29 @@
+
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+}
+
+.button-container {
+    display: flex;
+    gap: 10px; 
+}
+
+.button1 {
+    background-color: #3498db;
+    color: #fff; 
+    padding: 10px 20px; 
+    border: none;
+    cursor: pointer;
+}
+
+.button2 {
+    background-color: #2ecc71;
+    color: #fff; 
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}

@@ -70,8 +70,14 @@ export class BusinessOwnerFormComponent {
   //       }
   //     });
   //   }
+
+  doesThisPersonExist(): void {
+    this.eventService.getOneBusiness(this.user.id).subscribe((response: BusinessOwner) => {
+      this.doesIdExist = (response != null); 
+    });
+  }
   
-      setLocation(bool: string):void{
+  setLocation(bool: string):void{
         if(bool === "true"){
           this.fixedLocation = true;         
         }
@@ -81,6 +87,12 @@ export class BusinessOwnerFormComponent {
         this.displayForm = true;
         console.log(this.fixedLocation);
       }
+
+  updatedBusinessOwner(updatedOwner: BusinessOwner): void{
+    this.eventService.updateBusinessOwner(updatedOwner).subscribe((response:BusinessOwner) => {
+      console.log(response); 
+    })
+  }
 
   addNewOwner(newBusinessOwner: BusinessOwner): void{
     newBusinessOwner.oneLocation = this.fixedLocation;

@@ -62,4 +62,8 @@ export class UserformService {
     return this.http.post<BusinessOwner>(`${this.baseUrl}BusinessOwner`, owner);
   }
   
+updateBusinessOwner(owner:BusinessOwner): Observable<BusinessOwner>{
+  return this.http.patch<BusinessOwner>(`${this.baseUrl}BusinessOwner`, owner);
+}
+
 }
