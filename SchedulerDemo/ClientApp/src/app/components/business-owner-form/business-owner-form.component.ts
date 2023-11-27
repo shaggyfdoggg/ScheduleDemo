@@ -89,6 +89,7 @@ export class BusinessOwnerFormComponent {
       }
 
   updatedBusinessOwner(updatedOwner: BusinessOwner): void{
+    updatedOwner.businessGoogleId = this.user.id;
     this.eventService.updateBusinessOwner(updatedOwner).subscribe((response:BusinessOwner) => {
       console.log(response); 
     })
@@ -97,14 +98,14 @@ export class BusinessOwnerFormComponent {
   addNewOwner(newBusinessOwner: BusinessOwner): void{
     newBusinessOwner.oneLocation = this.fixedLocation;
     if(this.fixedLocation == false){
-      newBusinessOwner.Address = '';
-      newBusinessOwner.City = '';
-      newBusinessOwner.State = '';
+      newBusinessOwner.address = '';
+      newBusinessOwner.city = '';
+      newBusinessOwner.state = '';
     }
     console.log(newBusinessOwner.oneLocation)
-    newBusinessOwner.BusinessGoogleID = this.user.id;
-    newBusinessOwner.BusinessName = this.user.name;
-    newBusinessOwner.EmployeeName = "";
+    newBusinessOwner.businessGoogleId = this.user.id;
+    newBusinessOwner.businessName = this.user.name;
+    newBusinessOwner.employeeName = "";
    
     console.log("Prior to service");
 

@@ -1,14 +1,15 @@
 <br><br><br><br>
+<!-- *ngIf="!pickedService" taken from div below -->
 <div *ngIf="!pickedService">
   <p>Services:</p>
   <select [(ngModel)]="e.businessGoogleId">
-    <option *ngFor="let b of businessOwnerList" [value]="b.BusinessGoogleID" placeholder="fail">
-      {{ b.Services }}
+    <option *ngFor="let b of businessOwnerList" [value]="b.businessGoogleId" >
+      {{ b.services }} {{ b.businessName}} {{b.businessGoogleId}}
     </option>
   </select>
-  
+  <!-- <button (click)=" getBusinessOwner(e.businessGoogleId)">Submit</button> -->
   <button (click)="e.businessGoogleId && getBusinessOwner(e.businessGoogleId)">Submit</button>
-
+  
 </div>
 <!-- Logged in and location not in database form to set location -->
 <div class="form" *ngIf="loggedIn == true && doesIdExist == false && hasLocation == false">

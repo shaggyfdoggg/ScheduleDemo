@@ -31,11 +31,13 @@ export class CalendarComponent implements OnInit {
 
     this.authService.authState.subscribe((user) => {
       this.user = user;
+      
       this.loggedIn = (user != null);
       this.setGoogleId();
     });
 this.newUser.googleId = this.user.id;
-console.log(this.newUser.googleId)
+console.log(this.user);
+console.log(this.newUser.googleId);
     this.eventService.getByBusinessName(this.user.id).subscribe(response => {
       this.events = response;
       const today = new Date();
