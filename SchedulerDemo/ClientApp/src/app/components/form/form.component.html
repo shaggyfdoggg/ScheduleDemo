@@ -4,7 +4,7 @@
   <p>Services:</p>
   <select [(ngModel)]="e.businessGoogleId">
     <option *ngFor="let b of businessOwnerList" [value]="b.businessGoogleId" >
-      {{ b.services }} {{ b.businessName}} {{b.businessGoogleId}}
+      {{ b.services }} - {{ b.businessName}} 
     </option>
   </select>
   <!-- <button (click)=" getBusinessOwner(e.businessGoogleId)">Submit</button> -->

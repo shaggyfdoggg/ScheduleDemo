@@ -57,7 +57,8 @@
             {{ day.date.getDate() }}
             <ul>
               <li *ngFor="let event of day.events">
-                {{ event.event.description }} - {{ event.time }}
+                 {{ event.event.firstName }} 
+                 {{ event.event.description }}: {{ event.event.dateTime| date:'shortTime' }} - {{event.event.endDateTime | date:'shortTime'}}
               </li>
             </ul>
           </div>
@@ -85,7 +86,8 @@
             {{ day.date.getDate() }}
             <ul *ngIf="day.events.length > 0 && day === selectedDay">
               <li *ngFor="let event of day.events">
-                {{ event.event.description }} - {{ event.time }}
+                {{ event.event.firstName }}
+                {{ event.event.description }}: {{ event.event.dateTime| date:'shortTime' }} - {{event.event.endDateTime | date:'shortTime'}}
               </li>
             </ul>
           </div>
@@ -114,7 +116,8 @@
             {{ day.date.getDate() }}
             <ul *ngIf="day.events.length > 0 && isSelectedWeek(week)">
               <li *ngFor="let event of day.events">
-                {{ event.event.description }}: {{ event.time }} - {{event.endTime}}
+                {{ event.event.firstName }}
+                {{ event.event.description }}: {{ event.event.dateTime| date:'shortTime' }} - {{event.event.endDateTime | date:'shortTime'}}
               </li>
             </ul>
           </div>
