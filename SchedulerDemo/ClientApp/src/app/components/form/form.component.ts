@@ -163,7 +163,7 @@ export class FormComponent {
 
   newUserInfo(newUser: UserInfo): void {
     newUser.googleId = this.user.id;
-    if (this.currentOwner.oneLocation == true) {
+    if (this.currentOwner.oneLocation === true) {
       newUser.address = this.currentOwner.address;
       newUser.city = this.currentOwner.city;
       newUser.state = this.currentOwner.state;
@@ -172,11 +172,7 @@ export class FormComponent {
         this.doesIdExist = true;
       });
       this.userInfoList = [];
-    } else if (
-      newUser.address != '' &&
-      newUser.city != '' &&
-      newUser.state != ''
-    ) {
+    } else if (newUser.address != '' && newUser.city != '' && newUser.state != '') {
       this.userinfoservice.newUser(newUser).subscribe((response: UserInfo) => {
         this.userInfoList.push(response);
         this.doesIdExist = true;
@@ -224,15 +220,15 @@ export class FormComponent {
     if (this.futureEventOnly(newNewDate) == true) {
       for (let existingEvent of this.eventList) {
         if (!this.isEventOverlapping(existingEvent, newEvent)) {
-          console.log('entering if');
+          console.log('entering if not overlapping');
         } else {
           this.alreadyExists = true;
-          console.log('entering else');
+          console.log('entering else is overlapping event');
         }
       }
 
       if (this.user.name != null && this.alreadyExists === false) {
-        console.log('second if is working');
+        console.log('second if is working name is not null and event is not overlapping');
         this.userinfoservice
           .getById(this.user.id)
           .subscribe((response: UserInfo) => {

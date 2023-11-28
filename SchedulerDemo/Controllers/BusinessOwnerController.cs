@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using SchedulerDemo.Models;
 using System.Security.Cryptography.Xml;
 
@@ -29,9 +30,18 @@ namespace SchedulerDemo.Controllers
         }
 
         [HttpGet("owner/{businessGoogleId}")]
-        public BusinessOwner oneOwner(string businessGoogleId)
+        public BusinessOwner OneOwner(string businessGoogleId)
         {
             return dbContext.BusinessOwners.FirstOrDefault(b => b.BusinessGoogleId == businessGoogleId);
+        }
+        [HttpDelete("{businessGoogleId}")]
+        public BusinessOwner RemoveOwner(int Id)
+        {
+            BusinessOwner b = dbContext.BusinessOwners.FirstOrDefault(f =>  f.Id == Id);
+            dbContext.BusinessOwners.Remove(b);
+            dbContext.SaveChanges();
+            return b;
+
         }
 
         [HttpPost]

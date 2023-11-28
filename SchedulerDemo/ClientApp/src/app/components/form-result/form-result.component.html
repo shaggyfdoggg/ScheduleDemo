@@ -1,4 +1,30 @@
 <br><br><br>
+<div *ngIf="!isAdmin">
+  <p>User does not have Admin Privileges</p>
+</div>
+<div *ngIf="isAdmin">
+<div class="section">
+<h1>Owners Awaiting Approval</h1>
+</div>
+<br>
+<div class="section">
+<h1>Current Business Owners</h1>
+<div class="owner-container">
+  <div *ngFor="let b of businessList" class="owner-item">
+    <h4 class="owner-item-property">{{b.businessName}}</h4>
+    <h4 class="owner-item-property">{{b.services}}</h4>
+    <h4 class="owner-item-property">{{b.businessGoogleId}}</h4>
+    <p *ngIf="b.oneLocation === true" class="owner-item-property"> {{b.address}}</p>
+    <p *ngIf="b.oneLocation === true" class="owner-item-property"> {{b.city}}</p>
+    <p *ngIf="b.oneLocation === true" class="owner-item-property"> {{b.state}}</p>
+    <div *ngIf="((newUser.googleId == b.businessGoogleId) && (loggedIn == true) && (doesIdExist == true)) || isAdmin == true ">
+      <button class="button" (click)="deleteBusiness(b.ID)">Delete</button>
+  </div>
+</div>
+</div>
+
+<div class="section">
+<h1>Events</h1>
 <div class="list-container">
     <div *ngFor="let l of list" class="list-item">
       <h4 class="list-item-property">{{ l.firstName }}</h4>
@@ -12,4 +38,6 @@
       <button class="button" (click)="thisEventIsDeadToMe(l.id)">Delete</button>
     </div>
     </div>
+    </div>
   </div>
+</div>

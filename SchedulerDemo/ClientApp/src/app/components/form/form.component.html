@@ -159,18 +159,43 @@
 <div *ngIf="pickedService" class="form">
   <h2 style="color: rgb(0, 0, 0)">Add an Event</h2>
   
-  <div *ngIf="doesIdExist == false">
+  <div *ngIf="doesIdExist == false && currentOwner.oneLocation === true">
     <p>First Name</p>
     <input type="text" placeholder="First Name" [(ngModel)]="e.firstName" />
     <p>Last Name</p>
     <input type="text" placeholder="Last Name" [(ngModel)]="e.lastName" />
-  </div>
-  <div *ngIf="doesIdExist">
     <br />
     <h4>{{ user.firstName }} {{ user.lastName }}</h4>
+    <br>
+    <h5>Appointment For:</h5>
+    <h6>{{currentOwner.services}}-{{currentOwner.businessName}}</h6>
+    <p>Address: {{ currentOwner.address }}</p>
+    <p>City: {{ currentOwner.city }}</p>
+    <p>State: {{ currentOwner.state }}</p>
+    <br />
+  </div>
+    <!-- this is for if business owner doesnt have a fixed location and customer has account -->
+  <div *ngIf="doesIdExist && currentOwner.oneLocation === false">
+    <br />
+    <h4>{{ user.firstName }} {{ user.lastName }}</h4>
+    <br>
+    <h5>Appointment For:</h5>
+    <h6>{{currentOwner.services}}-{{currentOwner.businessName}}</h6>
     <p>Address: {{ newUser.address }}</p>
     <p>City: {{ newUser.city }}</p>
     <p>State: {{ newUser.state }}</p>
+    <br />
+  </div>
+  <!-- this is for if business owner has a fixed location and customer has account -->
+  <div *ngIf="doesIdExist && currentOwner.oneLocation === true">
+    <br />
+    <h4>{{ user.firstName }} {{ user.lastName }}</h4>
+    <br>
+    <h5>Appointment For:</h5>
+    <h6>{{currentOwner.services}}-{{currentOwner.businessName}}</h6>
+    <p>Address: {{ currentOwner.address }}</p>
+    <p>City: {{ currentOwner.city }}</p>
+    <p>State: {{ currentOwner.state }}</p>
     <br />
   </div>
   <p>Date</p>

@@ -2,10 +2,10 @@
 <br> <br> <br>
 <div >
 <body>
+  <div *ngIf="!loggedIn">
+    <p>Please login to continue</p>
+  </div>
   <div *ngIf="doesIdExist" class="container">
-    <div *ngIf="!loggedIn">
-      <p>Please login to continue</p>
-    </div>
     
     
 
@@ -89,11 +89,11 @@
         <p>Monday:</p>
         <div class="timeOptions">
           <p>Time Open:</p>
-          <select [(ngModel)]="newOwner.MondayHoursOpen">
+          <select [(ngModel)]="newOwner.mondayHoursOpen">
             <option *ngFor="let time of timeIntervals" [value]="time" >{{ time }}</option>
           </select>
           <p>Time Closed:</p>
-          <select [(ngModel)]="newOwner.MondayHoursClose">
+          <select [(ngModel)]="newOwner.mondayHoursClose">
             <option *ngFor="let time of timeIntervals" [value]="time" >{{ time }}</option>
           </select>
         </div>
@@ -103,11 +103,11 @@
         <p>Tuesday:</p>
         <div class="timeOptions">
           <p>Time Open:</p>
-          <select [(ngModel)]="newOwner.TuesdayHoursOpen">
+          <select [(ngModel)]="newOwner.tuesdayHoursOpen">
             <option *ngFor="let time of timeIntervals" [value]="time" >{{ time }}</option>
           </select>
           <p>Time Closed:</p>
-          <select [(ngModel)]="newOwner.TuesdayHoursClose">
+          <select [(ngModel)]="newOwner.tuesdayHoursClose">
             <option *ngFor="let time of timeIntervals" [value]="time">{{ time }}</option>
           </select>
         </div>
@@ -117,11 +117,11 @@
         <p>Wednesday:</p>
         <div class="timeOptions">
           <p>Time Open:</p>
-          <select [(ngModel)]="newOwner.WednesdayHoursOpen">
+          <select [(ngModel)]="newOwner.wednesdayHoursOpen">
             <option *ngFor="let time of timeIntervals" [value]="time">{{ time }}</option>
           </select>
           <p>Time Closed:</p>
-          <select [(ngModel)]="newOwner.WednesdayHoursClose">
+          <select [(ngModel)]="newOwner.wednesdayHoursClose">
             <option *ngFor="let time of timeIntervals" [value]="time" >{{ time }}</option>
           </select>
         </div>
@@ -131,11 +131,11 @@
         <p>Thursday:</p>
         <div class="timeOptions">
           <p>Time Open:</p>
-          <select [(ngModel)]="newOwner.ThursdayHoursOpen">
+          <select [(ngModel)]="newOwner.thursdayHoursOpen">
             <option *ngFor="let time of timeIntervals" [value]="time">{{ time }}</option>
           </select>
           <p>Time Closed:</p>
-          <select [(ngModel)]="newOwner.ThursdayHoursClose">
+          <select [(ngModel)]="newOwner.thursdayHoursClose">
             <option *ngFor="let time of timeIntervals" [value]="time">{{ time }}</option>
           </select>
         </div>
@@ -145,11 +145,11 @@
         <p>Friday:</p>
         <div class="timeOptions">
           <p>Time Open:</p>
-          <select [(ngModel)]="newOwner.FridayHoursOpen">
+          <select [(ngModel)]="newOwner.fridayHoursOpen">
             <option *ngFor="let time of timeIntervals" [value]="time">{{ time }}</option>
           </select>
           <p>Time Closed:</p>
-          <select [(ngModel)]="newOwner.FridayHoursClose">
+          <select [(ngModel)]="newOwner.fridayHoursClose">
             <option *ngFor="let time of timeIntervals" [value]="time">{{ time }}</option>
           </select>
         </div>
@@ -159,11 +159,11 @@
         <p>Saturday:</p>
         <div class="timeOptions">
           <p>Time Open:</p>
-          <select [(ngModel)]="newOwner.SaturdayHoursOpen">
+          <select [(ngModel)]="newOwner.saturdayHoursOpen">
             <option *ngFor="let time of timeIntervals" [value]="time">{{ time }}</option>
           </select>
           <p>Time Closed:</p>
-          <select [(ngModel)]="newOwner.SaturdayHoursClose">
+          <select [(ngModel)]="newOwner.saturdayHoursClose">
             <option *ngFor="let time of timeIntervals" [value]="time">{{ time }}</option>
           </select>
         </div>
@@ -173,11 +173,11 @@
         <p>Sunday:</p>
         <div class="timeOptions">
           <p>Time Open:</p>
-          <select [(ngModel)]="newOwner.SundayHoursOpen">
+          <select [(ngModel)]="newOwner.sundayHoursOpen">
             <option *ngFor="let time of timeIntervals" [value]="time">{{ time }}</option>
           </select>
           <p>Time Closed:</p>
-          <select [(ngModel)]="newOwner.SundayHoursClose">
+          <select [(ngModel)]="newOwner.sundayHoursClose">
             <option *ngFor="let time of timeIntervals" [value]="time">{{ time }}</option>
           </select>
         </div>
@@ -293,11 +293,11 @@
         <p>Monday:</p>
         <div class="timeOptions">
           <p>Time Open:</p>
-          <select [(ngModel)]="newOwner.MondayHoursOpen">
+          <select [(ngModel)]="newOwner.mondayHoursOpen">
             <option *ngFor="let time of timeIntervals" [value]="time" >{{ time }}</option>
           </select>
           <p>Time Closed:</p>
-          <select [(ngModel)]="newOwner.MondayHoursClose">
+          <select [(ngModel)]="newOwner.mondayHoursClose">
             <option *ngFor="let time of timeIntervals" [value]="time" >{{ time }}</option>
           </select>
         </div>
@@ -307,11 +307,11 @@
         <p>Tuesday:</p>
         <div class="timeOptions">
           <p>Time Open:</p>
-          <select [(ngModel)]="newOwner.TuesdayHoursOpen">
+          <select [(ngModel)]="newOwner.tuesdayHoursOpen">
             <option *ngFor="let time of timeIntervals" [value]="time" >{{ time }}</option>
           </select>
           <p>Time Closed:</p>
-          <select [(ngModel)]="newOwner.TuesdayHoursClose">
+          <select [(ngModel)]="newOwner.tuesdayHoursClose">
             <option *ngFor="let time of timeIntervals" [value]="time">{{ time }}</option>
           </select>
         </div>
@@ -321,11 +321,11 @@
         <p>Wednesday:</p>
         <div class="timeOptions">
           <p>Time Open:</p>
-          <select [(ngModel)]="newOwner.WednesdayHoursOpen">
+          <select [(ngModel)]="newOwner.wednesdayHoursOpen">
             <option *ngFor="let time of timeIntervals" [value]="time">{{ time }}</option>
           </select>
           <p>Time Closed:</p>
-          <select [(ngModel)]="newOwner.WednesdayHoursClose">
+          <select [(ngModel)]="newOwner.wednesdayHoursClose">
             <option *ngFor="let time of timeIntervals" [value]="time" >{{ time }}</option>
           </select>
         </div>
@@ -335,11 +335,11 @@
         <p>Thursday:</p>
         <div class="timeOptions">
           <p>Time Open:</p>
-          <select [(ngModel)]="newOwner.ThursdayHoursOpen">
+          <select [(ngModel)]="newOwner.thursdayHoursOpen">
             <option *ngFor="let time of timeIntervals" [value]="time">{{ time }}</option>
           </select>
           <p>Time Closed:</p>
-          <select [(ngModel)]="newOwner.ThursdayHoursClose">
+          <select [(ngModel)]="newOwner.thursdayHoursClose">
             <option *ngFor="let time of timeIntervals" [value]="time">{{ time }}</option>
           </select>
         </div>
@@ -349,11 +349,11 @@
         <p>Friday:</p>
         <div class="timeOptions">
           <p>Time Open:</p>
-          <select [(ngModel)]="newOwner.FridayHoursOpen">
+          <select [(ngModel)]="newOwner.fridayHoursOpen">
             <option *ngFor="let time of timeIntervals" [value]="time">{{ time }}</option>
           </select>
           <p>Time Closed:</p>
-          <select [(ngModel)]="newOwner.FridayHoursClose">
+          <select [(ngModel)]="newOwner.fridayHoursClose">
             <option *ngFor="let time of timeIntervals" [value]="time">{{ time }}</option>
           </select>
         </div>
@@ -363,11 +363,11 @@
         <p>Saturday:</p>
         <div class="timeOptions">
           <p>Time Open:</p>
-          <select [(ngModel)]="newOwner.SaturdayHoursOpen">
+          <select [(ngModel)]="newOwner.saturdayHoursOpen">
             <option *ngFor="let time of timeIntervals" [value]="time">{{ time }}</option>
           </select>
           <p>Time Closed:</p>
-          <select [(ngModel)]="newOwner.SaturdayHoursClose">
+          <select [(ngModel)]="newOwner.saturdayHoursClose">
             <option *ngFor="let time of timeIntervals" [value]="time">{{ time }}</option>
           </select>
         </div>
@@ -377,11 +377,11 @@
         <p>Sunday:</p>
         <div class="timeOptions">
           <p>Time Open:</p>
-          <select [(ngModel)]="newOwner.SundayHoursOpen">
+          <select [(ngModel)]="newOwner.sundayHoursOpen">
             <option *ngFor="let time of timeIntervals" [value]="time">{{ time }}</option>
           </select>
           <p>Time Closed:</p>
-          <select [(ngModel)]="newOwner.SundayHoursClose">
+          <select [(ngModel)]="newOwner.sundayHoursClose">
             <option *ngFor="let time of timeIntervals" [value]="time">{{ time }}</option>
           </select>
         </div>

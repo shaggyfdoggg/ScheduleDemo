@@ -4,6 +4,7 @@ import { UserformService } from 'src/app/services/userform.service';
 import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { UserInfoService } from 'src/app/services/user-info.service';
 import { UserInfo } from 'src/app/models/user-info';
+import { BusinessOwner } from 'src/app/models/business-owner';
 
 @Component({
   selector: 'app-form-result',
@@ -19,6 +20,7 @@ export class FormResultComponent {
   doesIdExist: boolean = false;
   pastEventList: Userform[] =[];
   deletedEvents: Userform = {} as Userform;
+  businessList: BusinessOwner [] = [];
 
   constructor(
     private _formService: UserformService,
@@ -37,7 +39,8 @@ export class FormResultComponent {
       
     });
     setTimeout(() => {
-      this.GetEvents();
+      this.getBusinesses();
+      this.getEvents();
     }, 500); 
   }
 
@@ -82,16 +85,28 @@ export class FormResultComponent {
     });
   }
 
-
-  thisEventIsDeadToMe(id: number): void {
-    this._formService.deleteEvent(id).subscribe((response: Userform) => {
-      this.GetEvents();
+  // this one is for deleting business that already exists
+  deleteBusiness(id: number): void{
+    this._formService.removeBusiness(id).subscribe((response:BusinessOwner) =>{
+      console.log(response, "has been deleted");
+      this.getBusinesses();
     });
   }
 
-  
+  thisEventIsDeadToMe(id: number): void {
+    this._formService.deleteEvent(id).subscribe((response: Userform) => {
+      console.log(response, "has been deleted")
+      this.getEvents();
+    });
+  }
 
-  GetEvents(): void {
+  getBusinesses():void {
+    this._formService.getAllBusiness().subscribe((response: BusinessOwner[]) =>{
+      this.businessList = response;
+    })
+  }
+
+  getEvents(): void {
     this._formService.getAll().subscribe((response: Userform[]) => {
       this.list = response.sort((a, b) => {
         const dateA = a.dateTime instanceof Date ? a.dateTime : new Date(a.dateTime);

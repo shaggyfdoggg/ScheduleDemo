@@ -27,10 +27,16 @@
             <a class="nav-link" [routerLink]="['/']">Home</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link" [routerLink]="['/event-list']">Event List</a>
+            <a class="nav-link" [routerLink]="['/new-event']">Schedule Appointment</a>
           </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link" [routerLink]="['/calendar']">Calendar</a>
+          <li *ngIf="isAdmin" class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link" [routerLink]="['/event-list']">Admin</a>
+          </li>
+          <li *ngIf="isOwner" class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link" [routerLink]="['/calendar']">My Calendar</a>
+          </li>
+          <li *ngIf="isOwner" class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link" [routerLink]="['/business-owner-form']">My Business Info</a>
           </li>
           <li class="nav-item">
             <asl-google-signin-button
