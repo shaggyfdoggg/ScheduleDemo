@@ -156,7 +156,10 @@ export class FormComponent {
       .getOneBusiness(businessId)
       .subscribe((response: BusinessOwner) => {
         this.currentOwner = response;
+        console.log(this.currentOwner.oneLocation)
+        if(this.currentOwner != null){
         this.hasLocation = this.currentOwner.oneLocation;
+        }
         this.pickedService = true;
       });
   }
@@ -248,7 +251,7 @@ export class FormComponent {
               });
           });
       } else if (this.alreadyExists === false) {
-        this.getBusinessOwner(this.newUser.googleId)
+        // this.getBusinessOwner(this.newUser.googleId)
         newEvent.address = this.currentOwner.address;
               newEvent.city = this.currentOwner.city;
               newEvent.state = this.currentOwner.state;

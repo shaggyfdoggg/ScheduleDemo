@@ -11,9 +11,9 @@ import { UserformService } from '../services/userform.service';
 export class NavMenuComponent {
   isExpanded = false;
   user: SocialUser = {} as SocialUser;
-  currentOwner: BusinessOwner ={} as BusinessOwner;
   loggedIn: boolean = false;
   isScrolled: boolean = false;
+  currentOwner: BusinessOwner ={} as BusinessOwner;
   isAdmin: boolean = false;
   isOwner: boolean = false;
   doesIdExist: boolean = false;

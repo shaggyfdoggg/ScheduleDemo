@@ -19,6 +19,8 @@ public partial class ScheduleDbContext : DbContext
 
     public virtual DbSet<Calendar> Calendars { get; set; }
 
+    public virtual DbSet<Service> Services { get; set; }
+
     public virtual DbSet<UserInfo> UserInfos { get; set; }
 
     public virtual DbSet<Userform> Userforms { get; set; }
@@ -69,6 +71,25 @@ public partial class ScheduleDbContext : DbContext
             entity.ToTable("Calendar");
 
             entity.Property(e => e.CalendarDate).HasColumnType("date");
+        });
+
+        modelBuilder.Entity<Service>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Services__3213E83F9D744920");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.BusinessGoogleId)
+                .HasMaxLength(255)
+                .HasColumnName("businessGoogleId");
+            entity.Property(e => e.EstimatedPrice)
+                .HasColumnType("decimal(10, 2)")
+                .HasColumnName("estimatedPrice");
+            entity.Property(e => e.MinutesLong)
+                .HasMaxLength(255)
+                .HasColumnName("minutesLong");
+            entity.Property(e => e.ServiceName)
+                .HasMaxLength(1000)
+                .HasColumnName("serviceName");
         });
 
         modelBuilder.Entity<UserInfo>(entity =>

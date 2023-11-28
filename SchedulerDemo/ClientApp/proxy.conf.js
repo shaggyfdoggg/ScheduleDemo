@@ -9,7 +9,9 @@ const PROXY_CONFIG = [
       "/Schedule",
       "/weatherforecast",
       "/UserInfo",
-      "/BusinessOwner"
+      "/BusinessOwner",
+      "/Service"
+
    ],
     proxyTimeout: 60000,
     target: target,

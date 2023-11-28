@@ -27,8 +27,15 @@
 <h1>Events</h1>
 <div class="list-container">
     <div *ngFor="let l of list" class="list-item">
-      <h4 class="list-item-property">{{ l.firstName }}</h4>
-      <h4 class="list-item-property">{{ l.lastName }}</h4>
+      
+      <h4 class="list-item-property">Customer Name:</h4>
+      <h6 class="list-item-property">{{ l.firstName }}</h6>
+      <h6 class="list-item-property">{{ l.lastName }}</h6>
+      <div *ngFor="let b of businessList">
+        <h4 *ngIf="l.businessGoogleId == b.businessGoogleId" class="list-item-property">Business:</h4>
+        <h6 *ngIf="l.businessGoogleId == b.businessGoogleId" class="list-item-property">{{b.services}} - {{ b.businessName }}</h6>
+      </div>
+      <br>
       <p class="list-item-property">{{ l.dateTime | date: "short" }}</p>
       <p class="list-item-property">{{ l.description }}</p>
       <p class="list-item-property">{{ l.address }}</p>

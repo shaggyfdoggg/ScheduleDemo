@@ -155,7 +155,7 @@
 
 
 
-<!-- Form to set appointment / create event -->
+<!-- Form to set appointment / create event when not logged in -->
 <div *ngIf="pickedService" class="form">
   <h2 style="color: rgb(0, 0, 0)">Add an Event</h2>
   
@@ -165,7 +165,7 @@
     <p>Last Name</p>
     <input type="text" placeholder="Last Name" [(ngModel)]="e.lastName" />
     <br />
-    <h4>{{ user.firstName }} {{ user.lastName }}</h4>
+    <!-- <h4>{{ user.firstName }} {{ user.lastName }}</h4> -->
     <br>
     <h5>Appointment For:</h5>
     <h6>{{currentOwner.services}}-{{currentOwner.businessName}}</h6>
