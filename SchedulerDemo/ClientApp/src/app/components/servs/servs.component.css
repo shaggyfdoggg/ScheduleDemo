@@ -1,14 +1,14 @@
-/* General styling for the container */
+
 div {
     margin: 20px;
   }
   
-  /* Styling for the form container */
+
   .service-form {
     max-width: 400px;
     margin: auto;
     padding: 20px;
-    border: 1px solid #ddd; /* Adjusted border color from #ccc to #ddd */
+    border: 1px solid #ddd; 
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
@@ -31,7 +31,7 @@ div {
     box-sizing: border-box;
   }
   
-  /* Styling for form groups */
+  
   .form-group {
     margin-bottom: 15px;
   }
@@ -50,14 +50,14 @@ div {
     border-radius: 5px;
   }
   
-  /* Styling for the service list container */
+  
   .service-list {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
   }
   
-  /* Styling for individual service items */
+  
   .service-item {
     border: 1px solid #ccc;
     border-radius: 8px;
@@ -70,10 +70,7 @@ div {
     transition: transform 0.3s ease-in-out;
   }
   
-  /* .service-item:hover {
-    transform: scale(1.05);
-  } */
-  
+ 
   .service-item h3 {
     font-size: 1.5em;
     margin-bottom: 10px;
@@ -101,7 +98,7 @@ div {
     background-color: rgb(151, 4, 4);
   }
   
-  /* Styling for the submit button */
+ 
   .service-form button {
     display: block;
     width: 100%;

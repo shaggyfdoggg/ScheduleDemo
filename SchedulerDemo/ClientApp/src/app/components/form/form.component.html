@@ -198,7 +198,7 @@
     <p>State: {{ currentOwner.state }}</p>
     <br />
   </div>
-  <p>Date</p>
+  <!-- <p>Date</p>
   <input
     type="date"
     placeholder="Date"
@@ -210,7 +210,26 @@
     <option
       *ngFor="let time of timeIntervals" [value]="time" placeholder="12:00">{{ time }}
     </option>
+  </select> -->
+
+
+  <p>Date</p>
+  <input type="date" placeholder="Date" [(ngModel)]="selectedDate" [min]="cutOffDate" />
+  <p>Time</p>
+  <select [(ngModel)]="selectedTime">
+    <option *ngFor="let time of generateTimeIntervals()" [value]="time">{{ time }}</option>
   </select>
+
+
+
+
+
+
+
+
+
+
+
 
   <p>Description</p>
   <select [(ngModel)]="e.description" >

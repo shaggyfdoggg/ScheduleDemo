@@ -35,6 +35,9 @@ export class FormComponent {
   timeIntervals: string[] = this.generateTimeIntervals();
   selectedDate: string = ''; // Initialize with an empty string
   listOfServices: Service[] = [];
+  currentService: Service = {} as Service;
+  duration:number = 0;
+
 
   constructor(
     private _formService: UserformService,
@@ -78,30 +81,78 @@ export class FormComponent {
     return `${year}-${month}-${day}`;
   }
 
-  generateTimeIntervals(): string[] {
-    let intervals = [];
-    let startTime = new Date();
-    startTime.setHours(0, 0, 0, 0);
+  // generateTimeIntervals(): string[] {
+  //   let intervals = [];
+  //   let startTime = new Date();
+  //   startTime.setHours(0, 0, 0, 0);
 
-    for (let i = 0; i < 96; i++) {
-      // 96 intervals for a 24-hour day
-      intervals.push(
-        startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-      );
-      startTime.setMinutes(startTime.getMinutes() + 15);
+  //   for (let i = 0; i < 96; i++) {
+  //     // 96 intervals for a 24-hour day
+  //     intervals.push(
+  //       startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+  //     );
+  //     startTime.setMinutes(startTime.getMinutes() + 15);
+  //   }
+
+  //   return intervals;
+  // }
+
+  generateTimeIntervals(): string[] {
+    const intervals: string[] = [];
+    const selectedDate = new Date(this.selectedDate);
+    
+    const dayOfWeek: number = selectedDate.getDay();
+  console.log(selectedDate, "selected date")
+    // Get the business owner's opening and closing hours for the selected day
+    let openingHours: string = (this.currentOwner as any)[`${this.getDayOfWeekString(dayOfWeek)}HoursOpen`];
+    let closingHours: string = (this.currentOwner as any)[`${this.getDayOfWeekString(dayOfWeek)}HoursClose`];
+    console.log('Opening Hours:', openingHours);
+    console.log('Closing Hours:', closingHours);
+  
+    if (!openingHours || !closingHours) {
+      // Business is closed on the selected day
+      return intervals;
     }
 
+  console.log(this.selectedDate, "selected date");
+
+let openingTime = new Date(this.selectedDate);
+openingTime.setHours(0, 0, 0, 0);
+console.log("opening time", openingTime);
+
+// Convert opening hours to 24-hour format
+const openingHoursIn24HourFormat = new Date(`${selectedDate.toDateString()} ${openingHours}`);
+openingTime.setHours(openingHoursIn24HourFormat.getHours(), openingHoursIn24HourFormat.getMinutes(), 0, 0);
+
+let closingTime = new Date(this.selectedDate);
+console.log("closing time line 163", closingTime);
+
+// Convert closing hours to 24-hour format
+const closingHoursIn24HourFormat = new Date(`${selectedDate.toDateString()} ${closingHours}`);
+closingTime.setHours(closingHoursIn24HourFormat.getHours(), closingHoursIn24HourFormat.getMinutes(), 0, 0);
+console.log("closing time", closingTime);
+
+  
+    for (let currentTime = new Date(openingTime); currentTime <= closingTime; currentTime.setMinutes(currentTime.getMinutes() + 15)) {
+      intervals.push(currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+    }
+    
+  console.log(intervals, "intervals")
     return intervals;
   }
 
-  // updateDateTime() {
-  //   // Combine the selected date and time into e.dateTime
-  //   const selectedDate = new Date(this.selectedDate);
-  //   const selectedTimeParts = this.selectedTime.split(':');
-  //   selectedDate.setHours(parseInt(selectedTimeParts[0], 10), parseInt(selectedTimeParts[1], 10));
 
-  //   this.e.dateTime = selectedDate;
-  // }
+
+  
+  getDayOfWeekString(dayIndex: number): string {
+    // Convert the day index to a string (e.g., 0 -> 'Sunday', 1 -> 'Monday', ...)
+    const daysOfWeek = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'  ];
+    return daysOfWeek[(dayIndex + 1) % 7];
+  }
+  
+
+
+
 
   updateDateTime() {
     // Combine the selected date and time into e.dateTime
@@ -221,18 +272,40 @@ export class FormComponent {
     }
   }
 
+
+
+
   addingEvent(newEvent: Userform): void {
+    // Update the date and time properties of the new event
     this.updateDateTime();
     console.log(newEvent);
+    // Convert the dateTime string to a Date object
     let newNewDate: Date = new Date(newEvent.dateTime);
-    let timestamp = newNewDate.getTime() + 30 * 60000;
+    // Find the service in the list of services based on the description
+    for (const service of this.listOfServices) {
+      if (service.serviceName === newEvent.description) {
+        this.currentService = service;
+        break;
+      }
+    }
+    // Set the duration of the event based on the selected service
+    this.duration = parseInt(this.currentService.minutesLong);
+  
+    // Calculate the timestamp for the endDateTime
+    let timestamp = newNewDate.getTime() + this.duration * 60000;
     newEvent.endDateTime = new Date(timestamp);
+  
+    // Log relevant information
     console.log(newNewDate);
     console.log(timestamp);
     console.log(newEvent.endDateTime);
     console.log(this.eventList);
+  
     this.alreadyExists = false;
-    if (this.futureEventOnly(newNewDate) == true) {
+  
+    // Check if the event is a future event only
+    if (this.futureEventOnly(newNewDate)) {
+      // Check for overlapping events
       for (let existingEvent of this.eventList) {
         if (!this.isEventOverlapping(existingEvent, newEvent)) {
           console.log('entering if not overlapping');
@@ -241,32 +314,32 @@ export class FormComponent {
           console.log('entering else is overlapping event');
         }
       }
-
+      // Check if the user's name is not null and the event does not overlap with existing events
       if (this.user.name != null && this.alreadyExists === false) {
         console.log('second if is working name is not null and event is not overlapping');
-        this.userinfoservice
-          .getById(this.user.id)
-          .subscribe((response: UserInfo) => {
-            if (this.doesIdExist) {
-              this.newUser = response;
-              newEvent.googleId = this.newUser.googleId;
-              newEvent.address = this.newUser.address;
-              newEvent.city = this.newUser.city;
-              newEvent.state = this.newUser.state;
-              newEvent.firstName = this.user.firstName;
-              newEvent.lastName = this.user.lastName;
-            }
-            this._formService
-              .addEvent(newEvent)
-              .subscribe((response: Userform) => {
-                this.eventList.push(response);
-              });
+  
+        // Fetch user information by ID
+        this.userinfoservice.getById(this.user.id).subscribe((response: UserInfo) => {
+          if (this.doesIdExist) {
+            this.newUser = response;
+            newEvent.googleId = this.newUser.googleId;
+            newEvent.address = this.newUser.address;
+            newEvent.city = this.newUser.city;
+            newEvent.state = this.newUser.state;
+            newEvent.firstName = this.user.firstName;
+            newEvent.lastName = this.user.lastName;
+          }
+          // Add the event to the database
+          this._formService.addEvent(newEvent).subscribe((response: Userform) => {
+            this.eventList.push(response);
           });
+        });
       } else if (this.alreadyExists === false) {
-        // this.getBusinessOwner(this.newUser.googleId)
+        // Add the event to the database with business owner information
         newEvent.address = this.currentOwner.address;
-              newEvent.city = this.currentOwner.city;
-              newEvent.state = this.currentOwner.state;
+        newEvent.city = this.currentOwner.city;
+        newEvent.state = this.currentOwner.state;
+  
         this._formService.addEvent(newEvent).subscribe((response: Userform) => {
           this.eventList.push(response);
         });
@@ -274,9 +347,12 @@ export class FormComponent {
         console.log('bool is working');
       }
     }
-
+    // Reset flags and objects
+    this.pickedService = false;
     this.e = {} as Userform;
     this.newUser = {} as UserInfo;
+    // Retrieve updated events
     this.GetEvents();
   }
+  
 }

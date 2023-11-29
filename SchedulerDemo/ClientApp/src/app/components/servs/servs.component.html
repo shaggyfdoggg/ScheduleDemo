@@ -1,34 +1,6 @@
-<!-- 
-<div>
-    <p>Name of Service:</p>
-    <input type="text" placeholder="Service Name" [(ngModel)]="currentService.serviceName" />
-    <p>Price:</p>
-    <input type="number" step="0.01" placeholder="$20.00" [(ngModel)]="currentService.estimatedPrice" />
-    <p>Estimated Length of Service in Minutes:</p>
-    <input type="number" step="1" placeholder="minutes" [(ngModel)]="currentService.minutesLong" />
-    <button (click)="newService(currentService)">Add Service</button>
-</div>
-
-
-
-<div *ngFor="let l of listOfServices">    
-<p>Service Name: {{l.serviceName}}</p>
-<p>Price: {{l.estimatedPrice}}</p>
-<p>Minutes Long: {{l.minutesLong}}</p>
-<button (click)="removeService(l.id)">Remove Service</button>
-</div> -->
-
 
 <div class="service-form">
     <h2>Add a New Service</h2>
-    <!-- <p>Name of Service:</p>
-    <input type="text" placeholder="Service Name" [(ngModel)]="currentService.serviceName" />
-    <p>Price:</p>
-    <input type="number" step="0.01" placeholder="$20.00" [(ngModel)]="currentService.estimatedPrice" />
-    <p>Estimated Length of Service in Minutes:</p>
-    <input type="number" step="1" placeholder="minutes" [(ngModel)]="currentService.minutesLong" />
-    <button (click)="newService(currentService)">Add Service</button> -->
-    
       <div class="form-group">
         <label for="serviceName">Name of Service:</label>
         <input type="text" id="serviceName" placeholder="Service Name" [(ngModel)]="currentService.serviceName" />
@@ -41,8 +13,7 @@
         <label for="minutesLong">Estimated Length of Service in Minutes:</label>
         <input type="number" id="minutesLong" step="1" placeholder="minutes" [(ngModel)]="currentService.minutesLong" />
       </div>
-      <button (click)="newService(currentService)">Add Service</button>
-    
+      <button (click)="newService(currentService)">Add Service</button> 
   </div>
   
   
