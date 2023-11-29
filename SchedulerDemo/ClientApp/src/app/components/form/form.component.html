@@ -216,6 +216,7 @@
   <p>Date</p>
   <input type="date" placeholder="Date" [(ngModel)]="selectedDate" [min]="cutOffDate" />
   <p>Time</p>
+  <p *ngIf="businessClosed == true">Closed or no appointments available on selected date</p>
   <select [(ngModel)]="selectedTime">
     <option *ngFor="let time of generateTimeIntervals()" [value]="time">{{ time }}</option>
   </select>

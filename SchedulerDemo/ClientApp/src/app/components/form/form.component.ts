@@ -37,7 +37,7 @@ export class FormComponent {
   listOfServices: Service[] = [];
   currentService: Service = {} as Service;
   duration:number = 0;
-
+  businessClosed: boolean = true;
 
   constructor(
     private _formService: UserformService,
@@ -111,6 +111,7 @@ export class FormComponent {
   
     if (!openingHours || !closingHours) {
       // Business is closed on the selected day
+      this.businessClosed = true;
       return intervals;
     }
 
@@ -123,7 +124,7 @@ console.log("opening time", openingTime);
 // Convert opening hours to 24-hour format
 const openingHoursIn24HourFormat = new Date(`${selectedDate.toDateString()} ${openingHours}`);
 openingTime.setHours(openingHoursIn24HourFormat.getHours(), openingHoursIn24HourFormat.getMinutes(), 0, 0);
-
+console.log(openingTime, "opening time ")
 let closingTime = new Date(this.selectedDate);
 console.log("closing time line 163", closingTime);
 
@@ -137,6 +138,13 @@ console.log("closing time", closingTime);
       intervals.push(currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
     }
     
+    if(intervals.length == 0){
+      this.businessClosed = true
+    }
+    else{
+      this.businessClosed = false;
+    }
+
   console.log(intervals, "intervals")
     return intervals;
   }
