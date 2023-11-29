@@ -5,6 +5,8 @@ import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { UserInfo } from 'src/app/models/user-info';
 import { UserInfoService } from 'src/app/services/user-info.service';
 import { BusinessOwner } from 'src/app/models/business-owner';
+import { ServiceService } from 'src/app/services/service.service';
+import { Service } from 'src/app/models/service';
 
 @Component({
   selector: 'app-form',
@@ -32,11 +34,13 @@ export class FormComponent {
   selectedTime: string = '';
   timeIntervals: string[] = this.generateTimeIntervals();
   selectedDate: string = ''; // Initialize with an empty string
+  listOfServices: Service[] = [];
 
   constructor(
     private _formService: UserformService,
     private authService: SocialAuthService,
-    private userinfoservice: UserInfoService
+    private userinfoservice: UserInfoService,
+    private servService: ServiceService
   ) {
     let now = new Date();
     this.currentDateTime = now.toISOString().slice(0, 16);
@@ -161,7 +165,15 @@ export class FormComponent {
         this.hasLocation = this.currentOwner.oneLocation;
         }
         this.pickedService = true;
+        this.getListofServicesForThisBusiness(businessId);
       });
+  }
+
+  getListofServicesForThisBusiness(businessId: string): void{
+    this.servService.getServicesByBusinessId(businessId).subscribe((response) => {
+      this.listOfServices = response;
+      console.log(this.listOfServices, "list has been populated");
+    });
   }
 
   newUserInfo(newUser: UserInfo): void {

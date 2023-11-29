@@ -5,11 +5,13 @@ import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { UserInfoService } from 'src/app/services/user-info.service';
 import { UserInfo } from 'src/app/models/user-info';
 import { BusinessOwner } from 'src/app/models/business-owner';
+import { ServiceService } from 'src/app/services/service.service';
+import { Service } from 'src/app/models/service';
 
 @Component({
   selector: 'app-form-result',
-  templateUrl: './form-result.component.html',
-  styleUrls: ['./form-result.component.css']
+  templateUrl: './admin.component.html',
+  styleUrls: ['./admin.component.css']
 })
 export class FormResultComponent {
   user: SocialUser = {} as SocialUser;
@@ -21,11 +23,14 @@ export class FormResultComponent {
   pastEventList: Userform[] =[];
   deletedEvents: Userform = {} as Userform;
   businessList: BusinessOwner [] = [];
+  listOfServices: Service[] = [];
+  currentService: Service = {} as Service;
 
   constructor(
     private _formService: UserformService,
     private authService: SocialAuthService,
-    private userinfoservice: UserInfoService
+    private userinfoservice: UserInfoService,
+    private servService: ServiceService
   ) {}
 
   ngOnInit() {
@@ -41,6 +46,7 @@ export class FormResultComponent {
     setTimeout(() => {
       this.getBusinesses();
       this.getEvents();
+      this.getServiceList();
     }, 500); 
   }
 
@@ -127,4 +133,19 @@ export class FormResultComponent {
       }
     });
   }
+
+
+// this is the service section
+    removeService(id:number):void{
+     this.servService.deleteService(id).subscribe((response:Service) => {
+        console.log(response, "deleted")
+     })
+    }
+
+    getServiceList():void{
+      this.servService.getAllServices().subscribe((response:Service[]) => {
+        console.log(response, "getServiceList")
+        this.listOfServices = response;
+      })
+    }
 }

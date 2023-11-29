@@ -4,38 +4,33 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
-
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { FormComponent } from './components/form/form.component';
-import { FormResultComponent } from './components/form-result/form-result.component';
-import { CalenderComponent } from './components/calender/calender.component';
+import { FormResultComponent } from './components/Admin/Admin.component';
 import { AboutComponent } from './components/about/about.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { DayComponent } from './components/day/day.component';
 import { BusinessOwnerFormComponent } from './components/business-owner-form/business-owner-form.component';
 import { ChoicepageComponent } from './components/choicepage/choicepage.component';
-import { ConfirmationComponent } from './components/confirmation/confirmation.component';
+import { ConfirmationComponent } from './components/confirmation-business-info/confirmation.component';
+import { ServsComponent } from './components/servs/servs.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
     FormComponent,
     FormResultComponent,
-    CalenderComponent,
     AboutComponent,
     CalendarComponent,
     DayComponent,
     BusinessOwnerFormComponent,
     ChoicepageComponent,
-    ConfirmationComponent
+    ConfirmationComponent,
+    ServsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -44,10 +39,7 @@ import { ConfirmationComponent } from './components/confirmation/confirmation.co
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
       { path: 'event-list', component: FormResultComponent },
-      { path: 'calendar-list', component: CalenderComponent },
       { path: 'calendar', component: CalendarComponent },
       { path: 'business-owner-form', component: BusinessOwnerFormComponent },
       { path: 'new-event', component: FormComponent},

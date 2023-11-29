@@ -53,6 +53,10 @@ export class BusinessOwnerFormComponent {
       this.authService.authState.subscribe((user) => {
         this.user = user;
         this.loggedIn = (user != null);
+        // this.doesThisPersonExist();
+        // if(this.doesIdExist = true){
+        //   this.displayForm = true;
+        // }
         // this.setGoogleId();
       });
        this.GetBusinesses();

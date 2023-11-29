@@ -213,7 +213,9 @@
   </select>
 
   <p>Description</p>
-  <input type="text" placeholder="Description" [(ngModel)]="e.description" />
+  <select [(ngModel)]="e.description" >
+    <option *ngFor="let service of listOfServices" [value]="service.serviceName">{{service.serviceName}} ${{service.estimatedPrice}} Duration: {{service.minutesLong}} minutes</option>
+  </select>
 
   <div *ngIf="doesIdExist == false && hasLocation == false">
     <p>Address</p>

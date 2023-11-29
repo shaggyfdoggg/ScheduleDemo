@@ -1,5 +1,11 @@
 <!-- *ngIf="doesIdExist" removed from div directly below -->
-<br> <br> <br>
+<br> <br> <br> <br> <br>
+<div *ngIf="loggedIn && !doesIdExist">
+<app-servs></app-servs>
+</div>
+
+
+
 <div >
 <body>
   <div *ngIf="!loggedIn">
@@ -184,7 +190,7 @@
       </div>
       <br>
 
-      <p>Select a Service</p>
+      <p>Select a Profession</p>
       <select [(ngModel)]="newOwner.services">
         <option>Barber</option>
         <option>LawnCare</option>
@@ -388,7 +394,7 @@
       </div>
       <br>
 
-      <p>Select a Service</p>
+      <p>Select a Profession</p>
       <select [(ngModel)]="newOwner.services">
         <option>Barber</option>
         <option>LawnCare</option>

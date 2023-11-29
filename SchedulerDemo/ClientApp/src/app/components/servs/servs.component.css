@@ -1,0 +1,120 @@
+/* General styling for the container */
+div {
+    margin: 20px;
+  }
+  
+  /* Styling for the form container */
+  .service-form {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ddd; /* Adjusted border color from #ccc to #ddd */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .service-form h2 {
+    font-size: 1.5em;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .service-form p {
+    margin: 10px 0;
+  }
+  
+  .service-form input,
+  .service-form button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+  }
+  
+  /* Styling for form groups */
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    font-size: 0.9em;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  /* Styling for the service list container */
+  .service-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  
+  /* Styling for individual service items */
+  .service-item {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px;
+    max-width: 300px;
+    text-align: center;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  /* .service-item:hover {
+    transform: scale(1.05);
+  } */
+  
+  .service-item h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+  
+  .service-details {
+    margin-bottom: 15px;
+  }
+  
+  .service-details p {
+    margin: 8px 0;
+  }
+  
+  .service-item button {
+    padding: 8px;
+    background-color: #e44d26;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .service-item button:hover {
+    background-color: rgb(151, 4, 4);
+  }
+  
+  /* Styling for the submit button */
+  .service-form button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #57c200;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .service-form button:hover {
+    background-color: rgb(50, 124, 0) ;
+  }
+  

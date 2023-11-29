@@ -1,0 +1,58 @@
+<!-- 
+<div>
+    <p>Name of Service:</p>
+    <input type="text" placeholder="Service Name" [(ngModel)]="currentService.serviceName" />
+    <p>Price:</p>
+    <input type="number" step="0.01" placeholder="$20.00" [(ngModel)]="currentService.estimatedPrice" />
+    <p>Estimated Length of Service in Minutes:</p>
+    <input type="number" step="1" placeholder="minutes" [(ngModel)]="currentService.minutesLong" />
+    <button (click)="newService(currentService)">Add Service</button>
+</div>
+
+
+
+<div *ngFor="let l of listOfServices">    
+<p>Service Name: {{l.serviceName}}</p>
+<p>Price: {{l.estimatedPrice}}</p>
+<p>Minutes Long: {{l.minutesLong}}</p>
+<button (click)="removeService(l.id)">Remove Service</button>
+</div> -->
+
+
+<div class="service-form">
+    <h2>Add a New Service</h2>
+    <!-- <p>Name of Service:</p>
+    <input type="text" placeholder="Service Name" [(ngModel)]="currentService.serviceName" />
+    <p>Price:</p>
+    <input type="number" step="0.01" placeholder="$20.00" [(ngModel)]="currentService.estimatedPrice" />
+    <p>Estimated Length of Service in Minutes:</p>
+    <input type="number" step="1" placeholder="minutes" [(ngModel)]="currentService.minutesLong" />
+    <button (click)="newService(currentService)">Add Service</button> -->
+    
+      <div class="form-group">
+        <label for="serviceName">Name of Service:</label>
+        <input type="text" id="serviceName" placeholder="Service Name" [(ngModel)]="currentService.serviceName" />
+      </div>
+      <div class="form-group">
+        <label for="estimatedPrice">Price:</label>
+        <input type="number" id="estimatedPrice" step="0.01" placeholder="$20.00" [(ngModel)]="currentService.estimatedPrice" />
+      </div>
+      <div class="form-group">
+        <label for="minutesLong">Estimated Length of Service in Minutes:</label>
+        <input type="number" id="minutesLong" step="1" placeholder="minutes" [(ngModel)]="currentService.minutesLong" />
+      </div>
+      <button (click)="newService(currentService)">Add Service</button>
+    
+  </div>
+  
+  
+  <div class="service-list" *ngFor="let l of listOfServices">
+    <div class="service-item">
+      <h3>{{ l.serviceName }}</h3>
+      <div class="service-details">
+        <p>Price: {{ l.estimatedPrice | currency:'USD':'symbol':'1.2-2' }}</p>
+        <p>Duration: {{ l.minutesLong }} minutes</p>
+      </div>
+      <button (click)="removeService(l.id)">Remove Service</button>
+    </div>
+  </div>
